@@ -75,6 +75,7 @@ from bot_definitions.pricing import (
     gem_count,
     lot_gems,
     min_covering_bid,
+    select_bid,
     tie_win_probability,
 )
 from bots import Bot, BotInfo, GameSummary, PlayerInfo, RoundResult
@@ -696,6 +697,9 @@ class AggressiveBot(Bot):
     use_liquidity = USE_LIQUIDITY
     use_reveal = USE_REVEAL
     use_endgame = USE_ENDGAME
+    # Buy a loan when the borrowed coins are worth more than the bid.
+    # The liquidity switch stays off: that one also capped treasure bids.
+    use_valued_loans = True
     time_budget_seconds = 0.25
 
     def __init__(self) -> None:
@@ -885,10 +889,22 @@ class AggressiveBot(Bot):
         return min(info.self_player.coins, cover_after_we_win(info))
 
     def _loan_bid(self, info: BotInfo) -> int:
-        if not self.use_liquidity:
+        if self.use_liquidity:
+            bid, _net = loan_decision(info, missions=self.use_missions)
+            return bid
+        if not self.use_valued_loans:
             return 0
-        bid, _net = loan_decision(info, missions=self.use_missions)
-        return bid
+        # Same loan price ValueLiquidityBot pays. Treasure bids stay on the
+        # aggressive curve; only the loan decision is shared.
+        return select_bid(
+            info,
+            lam=1.0,
+            delta=1.0,
+            bid_fraction=0.55,
+            bid_scale=2.0,
+            laplace_weight=0.8,
+            denial_weight=0.4,
+        )
 
     def _endgame_bid(self, info: BotInfo, budget: int, started: float) -> int:
         """Maximize expected final margin over the strongest rival.

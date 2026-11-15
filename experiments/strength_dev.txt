@@ -1,0 +1,884 @@
+Seeds 3000–3039 (40). Charts A–E. Seats rotated.
+Paired gaps are new minus old on the same seeds. Positive favors the change.
+
+3p VL
+31.6s, 40 seeds, 600 games
+Bot                                mean score   win rate
+VL                 84.00 [  79.79,   88.20]      42.2%
+Fraction           88.92 [  85.75,   92.09]      58.5%
+SmallBid           41.19 [  38.63,   43.75]       0.2%
+Paired mean score minus the others (positive favors VL):
+  vs Fraction           -4.92  [ -10.77,   +0.93]  CI includes 0
+  vs SmallBid          +42.81  [ +39.62,  +46.00]  CI above 0
+Mean score by chart (seed-level 95% CI of the focus shown below):
+chart               VL      Fraction      SmallBid
+A                82.25         89.67         40.12
+B                81.22         88.67         38.98
+C                70.44         80.81         35.79
+D                99.40         93.17         48.17
+E                86.68         92.29         42.88
+Paired chart gaps for VL:
+  A: | Fraction -7.42 [-14.44, -0.40] | SmallBid +42.13 [+38.47, +45.79]
+  B: | Fraction -7.46 [-14.17, -0.74] | SmallBid +42.23 [+38.15, +46.32]
+  C: | Fraction -10.37 [-16.49, -4.24] | SmallBid +34.65 [+30.93, +38.37]
+  D: | Fraction +6.23 [-2.62, +15.08] | SmallBid +51.23 [+45.68, +56.77]
+  E: | Fraction -5.61 [-14.88, +3.66] | SmallBid +43.80 [+37.42, +50.18]
+Seat-by-seat mean score and win rate:
+  VL               s0 85.1 (44%), s1 83.3 (42%), s2 83.5 (40%)
+  Fraction         s0 89.2 (61%), s1 87.5 (56%), s2 90.1 (58%)
+  SmallBid         s0 40.9 (0%), s1 41.6 (0%), s2 41.0 (0%)
+
+3p OldVL
+31.0s, 40 seeds, 600 games
+Bot                                mean score   win rate
+OldVL             101.25 [  97.12,  105.39]      87.2%
+Fraction           73.78 [  71.85,   75.70]      13.2%
+SmallBid           40.58 [  38.02,   43.14]       0.0%
+Paired mean score minus the others (positive favors OldVL):
+  vs Fraction          +27.48  [ +23.05,  +31.91]  CI above 0
+  vs SmallBid          +60.68  [ +56.25,  +65.10]  CI above 0
+Mean score by chart (seed-level 95% CI of the focus shown below):
+chart            OldVL      Fraction      SmallBid
+A               100.12         74.30         39.77
+B                98.81         73.27         38.74
+C                81.94         70.53         36.01
+D               119.15         76.10         46.01
+E               106.26         74.67         42.36
+Paired chart gaps for OldVL:
+  A: | Fraction +25.82 [+20.09, +31.55] | SmallBid +60.34 [+55.23, +65.46]
+  B: | Fraction +25.54 [+20.29, +30.79] | SmallBid +60.07 [+54.79, +65.35]
+  C: | Fraction +11.41 [+5.39, +17.43] | SmallBid +45.93 [+40.93, +50.93]
+  D: | Fraction +43.05 [+37.88, +48.22] | SmallBid +73.14 [+66.43, +79.86]
+  E: | Fraction +31.58 [+24.47, +38.69] | SmallBid +63.90 [+55.35, +72.45]
+Seat-by-seat mean score and win rate:
+  OldVL            s0 101.5 (90%), s1 100.8 (85%), s2 101.5 (87%)
+  Fraction         s0 73.4 (14%), s1 73.3 (10%), s2 74.7 (16%)
+  SmallBid         s0 40.3 (0%), s1 40.8 (0%), s2 40.7 (0%)
+
+3p Adaptive
+35.4s, 40 seeds, 600 games
+Bot                                mean score   win rate
+Adaptive          119.67 [ 114.62,  124.72]      90.7%
+Fraction           73.53 [  71.16,   75.90]       9.5%
+SmallBid           37.33 [  36.48,   38.19]       0.2%
+Paired mean score minus the others (positive favors Adaptive):
+  vs Fraction          +46.14  [ +40.72,  +51.56]  CI above 0
+  vs SmallBid          +82.34  [ +77.49,  +87.19]  CI above 0
+Mean score by chart (seed-level 95% CI of the focus shown below):
+chart         Adaptive      Fraction      SmallBid
+A               114.52         73.09         37.63
+B               119.61         75.76         37.34
+C                84.98         71.12         37.42
+D               156.03         72.67         36.30
+E               123.21         75.02         37.97
+Paired chart gaps for Adaptive:
+  A: | Fraction +41.42 [+34.88, +47.97] | SmallBid +76.88 [+70.38, +83.39]
+  B: | Fraction +43.85 [+35.34, +52.36] | SmallBid +82.27 [+74.69, +89.84]
+  C: | Fraction +13.87 [+8.10, +19.63] | SmallBid +47.57 [+42.26, +52.88]
+  D: | Fraction +83.35 [+75.32, +91.38] | SmallBid +119.72 [+113.04, +126.41]
+  E: | Fraction +48.19 [+40.42, +55.97] | SmallBid +85.24 [+75.24, +95.24]
+Seat-by-seat mean score and win rate:
+  Adaptive         s0 120.2 (91%), s1 119.1 (90%), s2 119.7 (91%)
+  Fraction         s0 73.5 (8%), s1 73.2 (9%), s2 73.9 (11%)
+  SmallBid         s0 37.2 (0%), s1 37.6 (0%), s2 37.2 (0%)
+
+3p OldAdaptive
+35.0s, 40 seeds, 600 games
+Bot                                mean score   win rate
+OldAdaptive       120.99 [ 115.76,  126.22]      93.0%
+Fraction           72.03 [  70.14,   73.92]       7.3%
+SmallBid           36.37 [  35.84,   36.90]       0.0%
+Paired mean score minus the others (positive favors OldAdaptive):
+  vs Fraction          +48.96  [ +43.33,  +54.59]  CI above 0
+  vs SmallBid          +84.62  [ +79.52,  +89.71]  CI above 0
+Mean score by chart (seed-level 95% CI of the focus shown below):
+chart      OldAdaptive      Fraction      SmallBid
+A               115.72         72.33         36.55
+B               119.88         72.27         36.12
+C                86.58         70.21         36.20
+D               155.78         71.85         36.24
+E               126.97         73.51         36.73
+Paired chart gaps for OldAdaptive:
+  A: | Fraction +43.40 [+36.42, +50.38] | SmallBid +79.17 [+72.57, +85.78]
+  B: | Fraction +47.62 [+40.15, +55.09] | SmallBid +83.76 [+76.63, +90.89]
+  C: | Fraction +16.38 [+9.97, +22.78] | SmallBid +50.38 [+44.66, +56.11]
+  D: | Fraction +83.93 [+76.27, +91.60] | SmallBid +119.54 [+112.44, +126.64]
+  E: | Fraction +53.46 [+45.64, +61.28] | SmallBid +90.23 [+80.61, +99.86]
+Seat-by-seat mean score and win rate:
+  OldAdaptive      s0 121.5 (94%), s1 119.9 (91%), s2 121.5 (94%)
+  Fraction         s0 71.7 (6%), s1 71.8 (6%), s2 72.5 (10%)
+  SmallBid         s0 36.6 (0%), s1 36.2 (0%), s2 36.3 (0%)
+
+3p Agg
+29.3s, 40 seeds, 600 games
+Bot                                mean score   win rate
+Agg                78.49 [  74.65,   82.32]      21.3%
+Fraction          103.00 [  99.32,  106.67]      78.8%
+SmallBid           40.60 [  38.44,   42.76]       0.0%
+Paired mean score minus the others (positive favors Agg):
+  vs Fraction          -24.51  [ -30.96,  -18.06]  CI below 0
+  vs SmallBid          +37.89  [ +35.23,  +40.54]  CI above 0
+Mean score by chart (seed-level 95% CI of the focus shown below):
+chart              Agg      Fraction      SmallBid
+A                78.94         98.22         40.07
+B                72.33        110.22         38.29
+C                66.91         91.46         35.77
+D                92.88        112.16         46.98
+E                81.38        102.92         41.90
+Paired chart gaps for Agg:
+  A: | Fraction -19.27 [-26.96, -11.59] | SmallBid +38.88 [+35.38, +42.37]
+  B: | Fraction -37.90 [-46.40, -29.40] | SmallBid +34.03 [+28.61, +39.45]
+  C: | Fraction -24.55 [-31.54, -17.56] | SmallBid +31.13 [+26.99, +35.28]
+  D: | Fraction -19.28 [-28.37, -10.19] | SmallBid +45.90 [+40.45, +51.35]
+  E: | Fraction -21.53 [-28.64, -14.42] | SmallBid +39.48 [+34.78, +44.19]
+Seat-by-seat mean score and win rate:
+  Agg              s0 78.9 (21%), s1 77.5 (20%), s2 79.0 (23%)
+  Fraction         s0 102.1 (78%), s1 103.5 (79%), s2 103.4 (80%)
+  SmallBid         s0 41.1 (0%), s1 40.8 (0%), s2 39.9 (0%)
+
+3p OldAgg
+28.6s, 40 seeds, 600 games
+Bot                                mean score   win rate
+OldAgg             82.39 [  77.07,   87.70]      27.3%
+Fraction          105.53 [ 101.22,  109.83]      73.3%
+SmallBid           37.16 [  36.00,   38.31]       0.0%
+Paired mean score minus the others (positive favors OldAgg):
+  vs Fraction          -23.14  [ -31.55,  -14.72]  CI below 0
+  vs SmallBid          +45.23  [ +40.52,  +49.95]  CI above 0
+Mean score by chart (seed-level 95% CI of the focus shown below):
+chart           OldAgg      Fraction      SmallBid
+A                81.83        104.66         36.33
+B                80.59        105.72         36.46
+C                57.43        104.31         36.83
+D               106.58        105.64         38.06
+E                85.50        107.30         38.11
+Paired chart gaps for OldAgg:
+  A: | Fraction -22.82 [-32.19, -13.46] | SmallBid +45.51 [+39.58, +51.43]
+  B: | Fraction -25.12 [-34.84, -15.41] | SmallBid +44.13 [+37.85, +50.42]
+  C: | Fraction -46.88 [-55.64, -38.11] | SmallBid +20.60 [+15.54, +25.66]
+  D: | Fraction +0.94 [-8.96, +10.85] | SmallBid +68.53 [+62.07, +74.98]
+  E: | Fraction -21.80 [-31.45, -12.15] | SmallBid +47.39 [+41.63, +53.15]
+Seat-by-seat mean score and win rate:
+  OldAgg           s0 82.0 (26%), s1 82.8 (30%), s2 82.3 (26%)
+  Fraction         s0 105.6 (74%), s1 105.9 (74%), s2 105.0 (72%)
+  SmallBid         s0 37.1 (0%), s1 37.2 (0%), s2 37.2 (0%)
+
+3p together new
+40.5s, 40 seeds, 600 games
+Bot                                mean score   win rate
+VL                 70.79 [  68.41,   73.16]      29.7%
+Adaptive           80.05 [  77.20,   82.91]      58.0%
+Agg                58.60 [  55.65,   61.54]      14.2%
+Paired mean score minus the others (positive favors VL):
+  vs Adaptive           -9.27  [ -13.76,   -4.77]  CI below 0
+  vs Agg               +12.19  [ +10.06,  +14.32]  CI above 0
+Mean score by chart (seed-level 95% CI of the focus shown below):
+chart               VL      Adaptive           Agg
+A                63.92         77.42         61.95
+B                78.76         80.20         51.96
+C                55.28         70.68         57.27
+D                88.24         89.06         58.81
+E                67.73         82.90         62.99
+Paired chart gaps for VL:
+  A: | Adaptive -13.51 [-19.31, -7.71] | Agg +1.97 [-1.73, +5.66]
+  B: | Adaptive -1.44 [-6.92, +4.04] | Agg +26.80 [+23.16, +30.44]
+  C: | Adaptive -15.40 [-21.50, -9.30] | Agg -1.99 [-5.95, +1.97]
+  D: | Adaptive -0.82 [-7.51, +5.88] | Agg +29.43 [+25.02, +33.84]
+  E: | Adaptive -15.17 [-22.02, -8.32] | Agg +4.74 [+0.76, +8.73]
+Seat-by-seat mean score and win rate:
+  VL               s0 70.8 (29%), s1 70.8 (33%), s2 70.8 (27%)
+  Adaptive         s0 81.4 (62%), s1 80.3 (57%), s2 78.5 (55%)
+  Agg              s0 59.7 (14%), s1 57.8 (12%), s2 58.3 (16%)
+
+3p together old
+41.2s, 40 seeds, 600 games
+Bot                                mean score   win rate
+VL                 80.21 [  78.23,   82.20]      57.5%
+Adaptive           73.59 [  71.48,   75.71]      37.2%
+Agg                57.75 [  55.48,   60.03]       8.5%
+Paired mean score minus the others (positive favors VL):
+  vs Adaptive           +6.62  [  +4.21,   +9.02]  CI above 0
+  vs Agg               +22.46  [ +19.74,  +25.18]  CI above 0
+Mean score by chart (seed-level 95% CI of the focus shown below):
+chart               VL      Adaptive           Agg
+A                80.38         72.56         56.35
+B                83.63         69.94         57.12
+C                68.72         66.29         52.40
+D                87.27         82.17         63.72
+E                81.06         77.00         59.18
+Paired chart gaps for VL:
+  A: | Adaptive +7.82 [+3.51, +12.13] | Agg +24.02 [+19.54, +28.51]
+  B: | Adaptive +13.69 [+8.91, +18.47] | Agg +26.52 [+21.80, +31.23]
+  C: | Adaptive +2.43 [-1.42, +6.29] | Agg +16.32 [+12.33, +20.32]
+  D: | Adaptive +5.09 [-0.04, +10.22] | Agg +23.55 [+18.82, +28.28]
+  E: | Adaptive +4.06 [-0.45, +8.57] | Agg +21.88 [+16.42, +27.33]
+Seat-by-seat mean score and win rate:
+  VL               s0 81.2 (56%), s1 78.4 (52%), s2 81.1 (64%)
+  Adaptive         s0 73.1 (32%), s1 72.1 (36%), s2 75.5 (43%)
+  Agg              s0 58.4 (10%), s1 56.9 (6%), s2 57.9 (10%)
+
+4p VL
+57.6s, 40 seeds, 800 games
+Bot                                mean score   win rate
+VL                 58.65 [  54.43,   62.86]      36.9%
+Fraction           65.25 [  61.68,   68.82]      56.0%
+SmallBid           30.47 [  28.30,   32.65]       1.0%
+Myopic             40.26 [  38.73,   41.78]       7.2%
+Paired mean score minus the others (positive favors VL):
+  vs Fraction           -6.60  [ -12.65,   -0.56]  CI below 0
+  vs SmallBid          +28.17  [ +24.47,  +31.87]  CI above 0
+  vs Myopic            +18.39  [ +13.75,  +23.03]  CI above 0
+Mean score by chart (seed-level 95% CI of the focus shown below):
+chart               VL      Fraction      SmallBid        Myopic
+A                60.28         64.58         31.68         44.42
+B                54.73         66.17         28.52         32.40
+C                49.62         58.24         26.89         43.01
+D                68.10         69.99         34.12         36.51
+E                60.49         67.26         31.15         44.94
+Paired chart gaps for VL:
+  A: | Fraction -4.30 [-12.46, +3.86] | SmallBid +28.60 [+23.57, +33.63] | Myopic +15.86 [+9.82, +21.90]
+  B: | Fraction -11.44 [-18.87, -4.02] | SmallBid +26.21 [+22.66, +29.75] | Myopic +22.33 [+17.84, +26.83]
+  C: | Fraction -8.61 [-15.19, -2.03] | SmallBid +22.74 [+18.83, +26.64] | Myopic +6.62 [+0.76, +12.48]
+  D: | Fraction -1.89 [-10.44, +6.65] | SmallBid +33.98 [+27.43, +40.52] | Myopic +31.59 [+25.50, +37.69]
+  E: | Fraction -6.78 [-14.64, +1.09] | SmallBid +29.34 [+23.19, +35.48] | Myopic +15.55 [+8.37, +22.73]
+Seat-by-seat mean score and win rate:
+  VL               s0 58.2 (36%), s1 58.1 (36%), s2 59.4 (36%), s3 58.9 (40%)
+  Fraction         s0 64.5 (53%), s1 65.4 (57%), s2 66.4 (58%), s3 64.7 (56%)
+  SmallBid         s0 30.3 (2%), s1 30.7 (1%), s2 30.1 (0%), s3 30.8 (0%)
+  Myopic           s0 39.9 (6%), s1 40.0 (7%), s2 40.3 (8%), s3 40.8 (8%)
+
+4p OldVL
+56.9s, 40 seeds, 800 games
+Bot                                mean score   win rate
+OldVL              73.09 [  68.71,   77.47]      79.6%
+Fraction           51.34 [  49.80,   52.89]      14.0%
+SmallBid           30.30 [  28.07,   32.52]       1.5%
+Myopic             40.01 [  38.55,   41.46]       6.6%
+Paired mean score minus the others (positive favors OldVL):
+  vs Fraction          +21.75  [ +17.66,  +25.84]  CI above 0
+  vs SmallBid          +42.80  [ +38.22,  +47.38]  CI above 0
+  vs Myopic            +33.09  [ +27.99,  +38.19]  CI above 0
+Mean score by chart (seed-level 95% CI of the focus shown below):
+chart            OldVL      Fraction      SmallBid        Myopic
+A                76.08         49.76         31.57         44.24
+B                69.71         51.31         28.57         32.31
+C                58.55         49.24         26.93         42.09
+D                84.56         54.56         33.73         36.51
+E                76.56         51.86         30.68         44.87
+Paired chart gaps for OldVL:
+  A: | Fraction +26.32 [+21.15, +31.49] | SmallBid +44.50 [+39.14, +49.86] | Myopic +31.84 [+25.92, +37.76]
+  B: | Fraction +18.40 [+13.65, +23.15] | SmallBid +41.14 [+36.01, +46.26] | Myopic +37.40 [+32.36, +42.44]
+  C: | Fraction +9.31 [+2.79, +15.83] | SmallBid +31.62 [+25.76, +37.49] | Myopic +16.46 [+9.14, +23.78]
+  D: | Fraction +30.01 [+23.95, +36.06] | SmallBid +50.84 [+42.81, +58.86] | Myopic +48.05 [+41.12, +54.98]
+  E: | Fraction +24.71 [+19.36, +30.05] | SmallBid +45.88 [+38.59, +53.17] | Myopic +31.69 [+24.54, +38.85]
+Seat-by-seat mean score and win rate:
+  OldVL            s0 72.6 (76%), s1 73.1 (80%), s2 73.1 (82%), s3 73.6 (80%)
+  Fraction         s0 50.6 (12%), s1 51.4 (16%), s2 52.3 (16%), s3 51.1 (12%)
+  SmallBid         s0 30.3 (2%), s1 30.6 (2%), s2 30.0 (2%), s3 30.3 (1%)
+  Myopic           s0 39.3 (6%), s1 40.6 (7%), s2 40.2 (7%), s3 40.0 (7%)
+
+4p Adaptive
+61.7s, 40 seeds, 800 games
+Bot                                mean score   win rate
+Adaptive           92.42 [  86.65,   98.18]      89.9%
+Fraction           49.66 [  48.13,   51.18]       6.9%
+SmallBid           26.38 [  25.67,   27.09]       0.0%
+Myopic             38.30 [  37.01,   39.59]       3.9%
+Paired mean score minus the others (positive favors Adaptive):
+  vs Fraction          +42.76  [ +37.42,  +48.11]  CI above 0
+  vs SmallBid          +66.04  [ +60.40,  +71.68]  CI above 0
+  vs Myopic            +54.11  [ +47.81,  +60.42]  CI above 0
+Mean score by chart (seed-level 95% CI of the focus shown below):
+chart         Adaptive      Fraction      SmallBid        Myopic
+A                92.88         48.78         27.43         42.88
+B                88.26         50.73         25.53         31.57
+C                68.00         47.12         25.66         41.01
+D               115.65         52.48         26.54         33.86
+E                97.29         49.17         26.73         42.21
+Paired chart gaps for Adaptive:
+  A: | Fraction +44.10 [+37.76, +50.44] | SmallBid +65.45 [+58.67, +72.23] | Myopic +50.01 [+42.27, +57.74]
+  B: | Fraction +37.52 [+30.92, +44.13] | SmallBid +62.73 [+55.77, +69.68] | Myopic +56.69 [+50.22, +63.16]
+  C: | Fraction +20.88 [+13.54, +28.22] | SmallBid +42.34 [+35.32, +49.35] | Myopic +26.99 [+18.92, +35.06]
+  D: | Fraction +63.17 [+55.39, +70.96] | SmallBid +89.11 [+81.74, +96.49] | Myopic +81.79 [+74.28, +89.30]
+  E: | Fraction +48.12 [+40.18, +56.07] | SmallBid +70.57 [+61.47, +79.66] | Myopic +55.09 [+46.25, +63.93]
+Seat-by-seat mean score and win rate:
+  Adaptive         s0 92.5 (90%), s1 90.9 (88%), s2 93.6 (91%), s3 92.7 (90%)
+  Fraction         s0 49.6 (6%), s1 49.1 (6%), s2 50.7 (10%), s3 49.2 (6%)
+  SmallBid         s0 26.2 (0%), s1 26.5 (0%), s2 26.3 (0%), s3 26.4 (0%)
+  Myopic           s0 38.1 (5%), s1 38.1 (4%), s2 38.6 (3%), s3 38.5 (4%)
+
+4p OldAdaptive
+62.6s, 40 seeds, 800 games
+Bot                                mean score   win rate
+OldAdaptive        92.39 [  86.44,   98.34]      88.9%
+Fraction           49.72 [  48.29,   51.15]       7.2%
+SmallBid           26.22 [  25.66,   26.77]       0.0%
+Myopic             38.48 [  37.13,   39.83]       4.2%
+Paired mean score minus the others (positive favors OldAdaptive):
+  vs Fraction          +42.67  [ +37.30,  +48.04]  CI above 0
+  vs SmallBid          +66.17  [ +60.35,  +72.00]  CI above 0
+  vs Myopic            +53.91  [ +47.31,  +60.51]  CI above 0
+Mean score by chart (seed-level 95% CI of the focus shown below):
+chart      OldAdaptive      Fraction      SmallBid        Myopic
+A                95.32         48.10         27.07         42.62
+B                86.36         50.62         25.74         31.66
+C                66.85         48.86         25.80         41.61
+D               114.56         51.73         26.35         34.17
+E                98.87         49.29         26.12         42.34
+Paired chart gaps for OldAdaptive:
+  A: | Fraction +47.22 [+40.64, +53.80] | SmallBid +68.24 [+61.30, +75.19] | Myopic +52.69 [+44.50, +60.89]
+  B: | Fraction +35.73 [+29.44, +42.03] | SmallBid +60.62 [+53.76, +67.47] | Myopic +54.70 [+48.32, +61.08]
+  C: | Fraction +17.99 [+10.42, +25.56] | SmallBid +41.05 [+33.94, +48.16] | Myopic +25.24 [+16.90, +33.57]
+  D: | Fraction +62.84 [+55.15, +70.53] | SmallBid +88.21 [+80.87, +95.56] | Myopic +80.39 [+72.90, +87.87]
+  E: | Fraction +49.58 [+41.40, +57.75] | SmallBid +72.75 [+63.03, +82.47] | Myopic +56.53 [+46.59, +66.47]
+Seat-by-seat mean score and win rate:
+  OldAdaptive      s0 92.2 (89%), s1 91.5 (88%), s2 93.5 (90%), s3 92.3 (88%)
+  Fraction         s0 49.7 (8%), s1 49.4 (7%), s2 50.3 (8%), s3 49.5 (6%)
+  SmallBid         s0 26.2 (0%), s1 26.3 (0%), s2 26.1 (0%), s3 26.2 (0%)
+  Myopic           s0 38.3 (4%), s1 38.4 (4%), s2 38.6 (5%), s3 38.6 (4%)
+
+4p Agg
+54.2s, 40 seeds, 800 games
+Bot                                mean score   win rate
+Agg                54.63 [  51.05,   58.20]      21.4%
+Fraction           76.13 [  72.21,   80.05]      74.0%
+SmallBid           30.01 [  27.93,   32.08]       0.5%
+Myopic             40.45 [  38.82,   42.07]       4.8%
+Paired mean score minus the others (positive favors Agg):
+  vs Fraction          -21.50  [ -27.27,  -15.74]  CI below 0
+  vs SmallBid          +24.62  [ +21.92,  +27.32]  CI above 0
+  vs Myopic            +14.18  [ +10.17,  +18.19]  CI above 0
+Mean score by chart (seed-level 95% CI of the focus shown below):
+chart              Agg      Fraction      SmallBid        Myopic
+A                56.76         72.86         30.42         45.18
+B                48.02         82.61         28.26         32.50
+C                47.71         67.33         26.38         42.73
+D                62.75         82.63         34.89         37.21
+E                57.89         75.24         30.07         44.61
+Paired chart gaps for Agg:
+  A: | Fraction -16.10 [-23.15, -9.05] | SmallBid +26.34 [+22.20, +30.48] | Myopic +11.57 [+6.64, +16.51]
+  B: | Fraction -34.58 [-41.36, -27.80] | SmallBid +19.76 [+15.86, +23.66] | Myopic +15.53 [+11.16, +19.89]
+  C: | Fraction -19.62 [-26.12, -13.12] | SmallBid +21.33 [+17.47, +25.19] | Myopic +4.97 [-0.86, +10.81]
+  D: | Fraction -19.88 [-28.67, -11.09] | SmallBid +27.86 [+22.44, +33.27] | Myopic +25.54 [+20.08, +31.01]
+  E: | Fraction -17.34 [-23.91, -10.78] | SmallBid +27.82 [+24.00, +31.64] | Myopic +13.29 [+8.31, +18.27]
+Seat-by-seat mean score and win rate:
+  Agg              s0 54.3 (22%), s1 53.9 (18%), s2 54.6 (22%), s3 55.8 (24%)
+  Fraction         s0 74.6 (71%), s1 76.7 (75%), s2 77.3 (76%), s3 76.0 (74%)
+  SmallBid         s0 30.4 (1%), s1 29.9 (0%), s2 29.8 (0%), s3 29.9 (0%)
+  Myopic           s0 40.5 (5%), s1 40.1 (4%), s2 40.7 (6%), s3 40.5 (4%)
+
+4p OldAgg
+53.8s, 40 seeds, 800 games
+Bot                                mean score   win rate
+OldAgg             59.55 [  54.55,   64.54]      30.0%
+Fraction           75.92 [  71.67,   80.18]      66.9%
+SmallBid           27.39 [  26.16,   28.62]       0.0%
+Myopic             39.97 [  38.49,   41.45]       4.1%
+Paired mean score minus the others (positive favors OldAgg):
+  vs Fraction          -16.38  [ -23.86,   -8.90]  CI below 0
+  vs SmallBid          +32.16  [ +27.89,  +36.43]  CI above 0
+  vs Myopic            +19.57  [ +14.13,  +25.02]  CI above 0
+Mean score by chart (seed-level 95% CI of the focus shown below):
+chart           OldAgg      Fraction      SmallBid        Myopic
+A                62.33         73.59         27.89         44.57
+B                54.54         79.53         26.52         31.62
+C                44.08         72.91         26.35         43.53
+D                75.52         75.96         28.59         35.84
+E                61.26         77.62         27.61         44.31
+Paired chart gaps for OldAgg:
+  A: | Fraction -11.26 [-19.40, -3.13] | SmallBid +34.44 [+29.25, +39.64] | Myopic +17.76 [+11.03, +24.50]
+  B: | Fraction -24.99 [-33.95, -16.03] | SmallBid +28.02 [+22.24, +33.81] | Myopic +22.93 [+17.42, +28.43]
+  C: | Fraction -28.83 [-36.43, -21.23] | SmallBid +17.73 [+12.76, +22.70] | Myopic +0.55 [-6.49, +7.59]
+  D: | Fraction -0.44 [-10.07, +9.18] | SmallBid +46.93 [+41.22, +52.64] | Myopic +39.68 [+33.58, +45.78]
+  E: | Fraction -16.36 [-24.65, -8.06] | SmallBid +33.65 [+28.19, +39.11] | Myopic +16.96 [+10.05, +23.87]
+Seat-by-seat mean score and win rate:
+  OldAgg           s0 59.5 (28%), s1 59.2 (28%), s2 60.2 (32%), s3 59.4 (31%)
+  Fraction         s0 75.4 (65%), s1 76.2 (68%), s2 76.5 (70%), s3 75.6 (64%)
+  SmallBid         s0 27.1 (0%), s1 27.9 (0%), s2 27.2 (0%), s3 27.4 (0%)
+  Myopic           s0 39.6 (4%), s1 40.3 (4%), s2 40.1 (4%), s3 39.9 (4%)
+
+4p together new
+62.1s, 40 seeds, 800 games
+Bot                                mean score   win rate
+VL                 51.66 [  49.41,   53.90]      28.2%
+Adaptive           58.32 [  55.15,   61.49]      55.1%
+Agg                41.85 [  39.52,   44.18]       8.6%
+Myopic             38.82 [  37.34,   40.30]      11.2%
+Paired mean score minus the others (positive favors VL):
+  vs Adaptive           -6.66  [  -9.85,   -3.47]  CI below 0
+  vs Agg                +9.81  [  +8.31,  +11.30]  CI above 0
+  vs Myopic            +12.84  [  +9.93,  +15.76]  CI above 0
+Mean score by chart (seed-level 95% CI of the focus shown below):
+chart               VL      Adaptive           Agg        Myopic
+A                47.78         56.08         45.23         43.71
+B                56.27         57.64         38.17         32.28
+C                40.52         48.62         39.33         41.94
+D                63.91         69.62         41.74         33.91
+E                49.80         59.64         44.78         42.23
+Paired chart gaps for VL:
+  A: | Adaptive -8.29 [-12.59, -3.99] | Agg +2.55 [-0.33, +5.43] | Myopic +4.07 [+0.22, +7.92]
+  B: | Adaptive -1.37 [-5.83, +3.09] | Agg +18.10 [+15.22, +20.98] | Myopic +23.99 [+20.44, +27.55]
+  C: | Adaptive -8.09 [-12.18, -4.00] | Agg +1.20 [-1.53, +3.93] | Myopic -1.42 [-5.23, +2.39]
+  D: | Adaptive -5.71 [-11.13, -0.29] | Agg +22.16 [+19.04, +25.29] | Myopic +29.99 [+25.79, +34.20]
+  E: | Adaptive -9.84 [-15.58, -4.11] | Agg +5.02 [+1.40, +8.64] | Myopic +7.57 [+3.21, +11.93]
+Seat-by-seat mean score and win rate:
+  VL               s0 52.5 (34%), s1 51.2 (23%), s2 51.1 (26%), s3 51.8 (30%)
+  Adaptive         s0 58.5 (56%), s1 56.4 (50%), s2 59.6 (57%), s3 58.9 (57%)
+  Agg              s0 42.0 (11%), s1 41.5 (6%), s2 42.4 (10%), s3 41.5 (8%)
+  Myopic           s0 39.5 (16%), s1 38.5 (10%), s2 38.6 (10%), s3 38.7 (10%)
+
+4p together old
+61.1s, 40 seeds, 800 games
+Bot                                mean score   win rate
+VL                 56.75 [  54.25,   59.25]      45.4%
+Adaptive           55.62 [  53.36,   57.89]      39.5%
+Agg                38.62 [  36.21,   41.03]       4.9%
+Myopic             40.08 [  38.47,   41.70]      13.0%
+Paired mean score minus the others (positive favors VL):
+  vs Adaptive           +1.12  [  -1.13,   +3.38]  CI includes 0
+  vs Agg               +18.13  [ +16.06,  +20.21]  CI above 0
+  vs Myopic            +16.67  [ +13.30,  +20.04]  CI above 0
+Mean score by chart (seed-level 95% CI of the focus shown below):
+chart               VL      Adaptive           Agg        Myopic
+A                56.28         53.91         38.94         46.92
+B                57.04         56.48         36.08         32.21
+C                49.39         48.06         32.13         44.86
+D                62.43         64.23         45.48         32.17
+E                58.60         55.45         40.46         44.24
+Paired chart gaps for VL:
+  A: | Adaptive +2.37 [-0.58, +5.31] | Agg +17.34 [+14.29, +20.40] | Myopic +9.36 [+3.91, +14.82]
+  B: | Adaptive +0.56 [-2.39, +3.52] | Agg +20.96 [+18.34, +23.57] | Myopic +24.82 [+21.26, +28.39]
+  C: | Adaptive +1.34 [-1.70, +4.37] | Agg +17.26 [+14.37, +20.16] | Myopic +4.53 [-0.47, +9.53]
+  D: | Adaptive -1.80 [-6.75, +3.15] | Agg +16.96 [+12.85, +21.06] | Myopic +30.26 [+26.23, +34.28]
+  E: | Adaptive +3.15 [-0.66, +6.96] | Agg +18.14 [+12.89, +23.39] | Myopic +14.36 [+8.77, +19.94]
+Seat-by-seat mean score and win rate:
+  VL               s0 57.4 (47%), s1 56.6 (46%), s2 55.7 (42%), s3 57.3 (48%)
+  Adaptive         s0 55.3 (38%), s1 55.4 (36%), s2 55.5 (38%), s3 56.3 (46%)
+  Agg              s0 38.9 (2%), s1 38.6 (5%), s2 38.5 (6%), s3 38.5 (6%)
+  Myopic           s0 40.6 (13%), s1 40.2 (12%), s2 39.9 (14%), s3 39.6 (13%)
+
+5p VL
+76.2s, 40 seeds, 1000 games
+Bot                                mean score   win rate
+VL                 59.09 [  55.52,   62.66]      43.6%
+Fraction           56.43 [  53.52,   59.34]      41.1%
+SmallBid           39.21 [  34.58,   43.83]      11.4%
+Myopic             35.19 [  33.65,   36.74]       5.7%
+Bot                20.00 [  20.00,   20.00]       0.0%
+Paired mean score minus the others (positive favors VL):
+  vs Fraction           +2.66  [  -2.66,   +7.98]  CI includes 0
+  vs SmallBid          +19.88  [ +14.97,  +24.80]  CI above 0
+  vs Myopic            +23.90  [ +20.26,  +27.54]  CI above 0
+  vs Bot               +39.09  [ +35.52,  +42.66]  CI above 0
+Mean score by chart (seed-level 95% CI of the focus shown below):
+chart               VL      Fraction      SmallBid        Myopic           Bot
+A                59.35         56.45         35.18         38.17         20.00
+B                58.33         57.98         37.44         29.34         20.00
+C                43.61         57.15         24.73         36.07         20.00
+D                72.55         54.71         57.43         31.94         20.00
+E                61.60         55.86         41.27         40.46         20.00
+Paired chart gaps for VL:
+  A: | Fraction +2.90 [-4.57, +10.37] | SmallBid +24.17 [+18.70, +29.64] | Myopic +21.18 [+15.56, +26.80] | Bot +39.35 [+34.11, +44.59]
+  B: | Fraction +0.35 [-6.66, +7.36] | SmallBid +20.89 [+15.26, +26.52] | Myopic +28.99 [+24.00, +33.98] | Bot +38.33 [+33.87, +42.78]
+  C: | Fraction -13.53 [-19.86, -7.20] | SmallBid +18.89 [+14.91, +22.87] | Myopic +7.54 [+2.21, +12.88] | Bot +23.62 [+19.31, +27.92]
+  D: | Fraction +17.84 [+11.08, +24.61] | SmallBid +15.12 [+5.94, +24.31] | Myopic +40.62 [+35.77, +45.47] | Bot +52.55 [+47.90, +57.21]
+  E: | Fraction +5.74 [-2.94, +14.42] | SmallBid +20.33 [+12.74, +27.92] | Myopic +21.14 [+14.32, +27.97] | Bot +41.61 [+35.05, +48.16]
+Seat-by-seat mean score and win rate:
+  VL               s0 58.6 (42%), s1 60.6 (47%), s2 58.7 (41%), s3 58.7 (42%), s4 58.8 (46%)
+  Fraction         s0 57.0 (44%), s1 55.5 (40%), s2 55.5 (37%), s3 56.3 (42%), s4 57.9 (42%)
+  SmallBid         s0 39.1 (12%), s1 38.8 (9%), s2 39.9 (12%), s3 39.0 (10%), s4 39.3 (12%)
+  Myopic           s0 36.2 (7%), s1 34.6 (6%), s2 34.6 (3%), s3 36.2 (6%), s4 34.3 (6%)
+  Bot              s0 20.0 (0%), s1 20.0 (0%), s2 20.0 (0%), s3 20.0 (0%), s4 20.0 (0%)
+
+5p OldVL
+76.1s, 40 seeds, 1000 games
+Bot                                mean score   win rate
+OldVL              70.17 [  66.83,   73.50]      78.2%
+Fraction           44.37 [  43.27,   45.47]       8.0%
+SmallBid           39.66 [  34.94,   44.38]      11.5%
+Myopic             35.26 [  33.63,   36.89]       3.4%
+Bot                20.00 [  20.00,   20.00]       0.0%
+Paired mean score minus the others (positive favors OldVL):
+  vs Fraction          +25.80  [ +22.50,  +29.09]  CI above 0
+  vs SmallBid          +30.51  [ +24.52,  +36.50]  CI above 0
+  vs Myopic            +34.91  [ +31.68,  +38.13]  CI above 0
+  vs Bot               +50.17  [ +46.83,  +53.50]  CI above 0
+Mean score by chart (seed-level 95% CI of the focus shown below):
+chart            OldVL      Fraction      SmallBid        Myopic           Bot
+A                69.77         44.71         36.63         37.66         20.00
+B                69.98         44.81         38.09         30.62         20.00
+C                55.67         42.04         25.26         35.64         20.00
+D                80.69         46.12         57.21         32.94         20.00
+E                74.72         44.16         41.11         39.44         20.00
+Paired chart gaps for OldVL:
+  A: | Fraction +25.05 [+20.42, +29.69] | SmallBid +33.13 [+26.67, +39.60] | Myopic +32.11 [+27.69, +36.52] | Bot +49.77 [+45.54, +53.99]
+  B: | Fraction +25.17 [+20.71, +29.63] | SmallBid +31.89 [+24.94, +38.85] | Myopic +39.36 [+34.72, +44.01] | Bot +49.98 [+45.65, +54.32]
+  C: | Fraction +13.63 [+8.39, +18.88] | SmallBid +30.41 [+25.54, +35.29] | Myopic +20.04 [+14.50, +25.57] | Bot +35.67 [+30.87, +40.48]
+  D: | Fraction +34.57 [+30.08, +39.05] | SmallBid +23.48 [+13.75, +33.20] | Myopic +47.74 [+43.08, +52.41] | Bot +60.69 [+56.39, +64.98]
+  E: | Fraction +30.55 [+25.10, +36.01] | SmallBid +33.61 [+25.09, +42.13] | Myopic +35.29 [+29.03, +41.54] | Bot +54.72 [+48.05, +61.39]
+Seat-by-seat mean score and win rate:
+  OldVL            s0 70.0 (74%), s1 70.0 (78%), s2 70.2 (81%), s3 70.3 (79%), s4 70.4 (79%)
+  Fraction         s0 44.7 (8%), s1 44.5 (11%), s2 44.0 (8%), s3 44.3 (5%), s4 44.4 (8%)
+  SmallBid         s0 40.1 (12%), s1 39.2 (10%), s2 39.2 (13%), s3 40.1 (12%), s4 39.6 (10%)
+  Myopic           s0 36.0 (5%), s1 34.7 (2%), s2 35.1 (4%), s3 35.7 (4%), s4 34.8 (3%)
+  Bot              s0 20.0 (0%), s1 20.0 (0%), s2 20.0 (0%), s3 20.0 (0%), s4 20.0 (0%)
+
+5p Adaptive
+79.5s, 40 seeds, 1000 games
+Bot                                mean score   win rate
+Adaptive          106.47 [ 100.96,  111.97]      95.9%
+Fraction           42.76 [  41.64,   43.87]       3.2%
+SmallBid           23.64 [  22.31,   24.97]       0.1%
+Myopic             31.51 [  30.32,   32.69]       1.1%
+Bot                20.00 [  20.00,   20.00]       0.0%
+Paired mean score minus the others (positive favors Adaptive):
+  vs Fraction          +63.71  [ +58.10,  +69.32]  CI above 0
+  vs SmallBid          +82.83  [ +77.53,  +88.12]  CI above 0
+  vs Myopic            +74.96  [ +69.03,  +80.90]  CI above 0
+  vs Bot               +86.47  [ +80.96,  +91.97]  CI above 0
+Mean score by chart (seed-level 95% CI of the focus shown below):
+chart         Adaptive      Fraction      SmallBid        Myopic           Bot
+A               100.47         42.16         24.45         34.03         20.00
+B               107.99         43.98         23.16         27.94         20.00
+C                69.42         42.02         22.74         34.72         20.00
+D               143.24         44.45         23.20         26.04         20.00
+E               111.22         41.17         24.65         34.80         20.00
+Paired chart gaps for Adaptive:
+  A: | Fraction +58.31 [+51.79, +64.84] | SmallBid +76.03 [+69.65, +82.40] | Myopic +66.44 [+59.56, +73.33] | Bot +80.47 [+73.92, +87.03]
+  B: | Fraction +64.01 [+55.93, +72.09] | SmallBid +84.83 [+77.16, +92.49] | Myopic +80.05 [+72.00, +88.10] | Bot +87.99 [+80.41, +95.57]
+  C: | Fraction +27.40 [+20.19, +34.61] | SmallBid +46.68 [+40.32, +53.04] | Myopic +34.70 [+27.33, +42.07] | Bot +49.42 [+42.83, +56.01]
+  D: | Fraction +98.78 [+90.90, +106.67] | SmallBid +120.04 [+112.18, +127.90] | Myopic +117.20 [+109.11, +125.29] | Bot +123.24 [+115.81, +130.67]
+  E: | Fraction +70.05 [+62.44, +77.65] | SmallBid +86.56 [+77.23, +95.90] | Myopic +76.41 [+68.22, +84.60] | Bot +91.22 [+82.05, +100.38]
+Seat-by-seat mean score and win rate:
+  Adaptive         s0 106.9 (96%), s1 106.4 (96%), s2 107.1 (96%), s3 106.1 (96%), s4 105.7 (96%)
+  Fraction         s0 42.7 (2%), s1 42.4 (3%), s2 42.9 (4%), s3 42.9 (4%), s4 43.0 (3%)
+  SmallBid         s0 24.1 (0%), s1 23.7 (0%), s2 23.2 (0%), s3 23.4 (0%), s4 23.8 (0%)
+  Myopic           s0 31.7 (2%), s1 31.0 (0%), s2 31.8 (2%), s3 31.8 (1%), s4 31.3 (0%)
+  Bot              s0 20.0 (0%), s1 20.0 (0%), s2 20.0 (0%), s3 20.0 (0%), s4 20.0 (0%)
+
+5p OldAdaptive
+79.2s, 40 seeds, 1000 games
+Bot                                mean score   win rate
+OldAdaptive       106.01 [ 100.32,  111.70]      95.4%
+Fraction           43.01 [  41.87,   44.16]       3.4%
+SmallBid           23.91 [  22.63,   25.20]       0.3%
+Myopic             31.84 [  30.60,   33.08]       1.4%
+Bot                20.00 [  20.00,   20.00]       0.0%
+Paired mean score minus the others (positive favors OldAdaptive):
+  vs Fraction          +63.00  [ +57.14,  +68.85]  CI above 0
+  vs SmallBid          +82.10  [ +76.58,  +87.62]  CI above 0
+  vs Myopic            +74.17  [ +68.07,  +80.28]  CI above 0
+  vs Bot               +86.01  [ +80.32,  +91.70]  CI above 0
+Mean score by chart (seed-level 95% CI of the focus shown below):
+chart      OldAdaptive      Fraction      SmallBid        Myopic           Bot
+A                99.46         42.86         25.01         34.94         20.00
+B               107.20         43.99         23.43         28.20         20.00
+C                69.50         42.13         22.94         35.16         20.00
+D               141.97         44.45         23.83         25.89         20.00
+E               111.92         41.63         24.36         35.02         20.00
+Paired chart gaps for OldAdaptive:
+  A: | Fraction +56.60 [+49.69, +63.50] | SmallBid +74.45 [+67.16, +81.74] | Myopic +64.52 [+57.29, +71.75] | Bot +79.46 [+72.60, +86.32]
+  B: | Fraction +63.20 [+55.24, +71.17] | SmallBid +83.76 [+76.12, +91.40] | Myopic +79.00 [+71.04, +86.96] | Bot +87.20 [+79.73, +94.66]
+  C: | Fraction +27.38 [+20.37, +34.38] | SmallBid +46.56 [+40.32, +52.81] | Myopic +34.35 [+27.21, +41.49] | Bot +49.51 [+43.00, +56.01]
+  D: | Fraction +97.52 [+89.24, +105.80] | SmallBid +118.15 [+109.88, +126.41] | Myopic +116.08 [+107.64, +124.53] | Bot +121.97 [+114.20, +129.75]
+  E: | Fraction +70.29 [+62.07, +78.51] | SmallBid +87.56 [+77.69, +97.43] | Myopic +76.91 [+67.88, +85.93] | Bot +91.92 [+82.33, +101.51]
+Seat-by-seat mean score and win rate:
+  OldAdaptive      s0 105.7 (94%), s1 106.4 (97%), s2 106.1 (94%), s3 106.3 (96%), s4 105.6 (96%)
+  Fraction         s0 43.4 (2%), s1 42.1 (4%), s2 42.7 (3%), s3 43.2 (4%), s4 43.7 (4%)
+  SmallBid         s0 23.7 (0%), s1 24.1 (0%), s2 24.1 (2%), s3 23.4 (0%), s4 24.3 (0%)
+  Myopic           s0 32.0 (1%), s1 31.3 (2%), s2 31.9 (2%), s3 32.0 (2%), s4 32.0 (1%)
+  Bot              s0 20.0 (0%), s1 20.0 (0%), s2 20.0 (0%), s3 20.0 (0%), s4 20.0 (0%)
+
+5p Agg
+69.6s, 40 seeds, 1000 games
+Bot                                mean score   win rate
+Agg                49.60 [  47.72,   51.48]      12.5%
+Fraction           71.98 [  68.13,   75.83]      75.3%
+SmallBid           37.62 [  32.86,   42.39]      10.3%
+Myopic             35.18 [  33.34,   37.02]       4.3%
+Bot                20.00 [  20.00,   20.00]       0.0%
+Paired mean score minus the others (positive favors Agg):
+  vs Fraction          -22.38  [ -27.25,  -17.51]  CI below 0
+  vs SmallBid          +11.98  [  +8.04,  +15.92]  CI above 0
+  vs Myopic            +14.42  [ +12.16,  +16.68]  CI above 0
+  vs Bot               +29.60  [ +27.72,  +31.48]  CI above 0
+Mean score by chart (seed-level 95% CI of the focus shown below):
+chart              Agg      Fraction      SmallBid        Myopic           Bot
+A                49.55         70.99         33.94         37.46         20.00
+B                47.30         77.50         35.98         30.24         20.00
+C                42.84         63.32         23.99         35.77         20.00
+D                58.33         77.61         54.87         30.76         20.00
+E                49.98         70.48         39.35         41.67         20.00
+Paired chart gaps for Agg:
+  A: | Fraction -21.45 [-26.34, -16.55] | SmallBid +15.60 [+11.05, +20.16] | Myopic +12.08 [+8.90, +15.26] | Bot +29.54 [+27.53, +31.56]
+  B: | Fraction -30.20 [-36.83, -23.56] | SmallBid +11.33 [+6.17, +16.49] | Myopic +17.07 [+13.95, +20.19] | Bot +27.30 [+24.30, +30.31]
+  C: | Fraction -20.48 [-25.55, -15.41] | SmallBid +18.85 [+16.65, +21.05] | Myopic +7.08 [+3.24, +10.91] | Bot +22.84 [+20.38, +25.30]
+  D: | Fraction -19.29 [-27.37, -11.20] | SmallBid +3.46 [-5.93, +12.85] | Myopic +27.57 [+23.59, +31.56] | Bot +38.33 [+34.86, +41.80]
+  E: | Fraction -20.50 [-26.93, -14.07] | SmallBid +10.64 [+5.46, +15.81] | Myopic +8.32 [+3.25, +13.38] | Bot +29.99 [+26.50, +33.47]
+Seat-by-seat mean score and win rate:
+  Agg              s0 50.1 (16%), s1 49.4 (12%), s2 49.1 (12%), s3 49.1 (11%), s4 50.3 (12%)
+  Fraction         s0 71.1 (74%), s1 71.1 (73%), s2 73.0 (74%), s3 72.5 (80%), s4 72.2 (76%)
+  SmallBid         s0 38.6 (10%), s1 37.8 (10%), s2 36.9 (10%), s3 37.3 (12%), s4 37.5 (10%)
+  Myopic           s0 35.6 (2%), s1 35.0 (6%), s2 35.1 (6%), s3 35.7 (4%), s4 34.6 (3%)
+  Bot              s0 20.0 (0%), s1 20.0 (0%), s2 20.0 (0%), s3 20.0 (0%), s4 20.0 (0%)
+
+5p OldAgg
+70.3s, 40 seeds, 1000 games
+Bot                                mean score   win rate
+OldAgg             55.71 [  52.65,   58.78]      24.9%
+Fraction           71.04 [  66.71,   75.36]      68.8%
+SmallBid           32.93 [  28.87,   37.00]       5.6%
+Myopic             34.57 [  32.83,   36.30]       2.6%
+Bot                20.00 [  20.00,   20.00]       0.0%
+Paired mean score minus the others (positive favors OldAgg):
+  vs Fraction          -15.33  [ -21.63,   -9.02]  CI below 0
+  vs SmallBid          +22.78  [ +19.77,  +25.78]  CI above 0
+  vs Myopic            +21.14  [ +18.01,  +24.28]  CI above 0
+  vs Bot               +35.71  [ +32.65,  +38.78]  CI above 0
+Mean score by chart (seed-level 95% CI of the focus shown below):
+chart           OldAgg      Fraction      SmallBid        Myopic           Bot
+A                55.61         71.60         30.27         35.79         20.00
+B                57.30         72.46         29.99         29.17         20.00
+C                41.30         68.06         22.39         36.48         20.00
+D                65.85         73.91         46.84         31.51         20.00
+E                58.50         69.16         35.17         39.89         20.00
+Paired chart gaps for OldAgg:
+  A: | Fraction -15.99 [-22.84, -9.14] | SmallBid +25.34 [+21.64, +29.04] | Myopic +19.82 [+15.77, +23.88] | Bot +35.61 [+32.06, +39.16]
+  B: | Fraction -15.17 [-22.87, -7.46] | SmallBid +27.30 [+21.92, +32.68] | Myopic +28.12 [+24.27, +31.98] | Bot +37.30 [+33.05, +41.54]
+  C: | Fraction -26.76 [-34.13, -19.39] | SmallBid +18.91 [+14.87, +22.95] | Myopic +4.82 [-0.67, +10.31] | Bot +21.30 [+16.77, +25.83]
+  D: | Fraction -8.06 [-16.17, +0.05] | SmallBid +19.02 [+12.50, +25.53] | Myopic +34.34 [+29.76, +38.91] | Bot +45.85 [+42.52, +49.18]
+  E: | Fraction -10.66 [-18.15, -3.17] | SmallBid +23.33 [+18.13, +28.53] | Myopic +18.62 [+13.19, +24.05] | Bot +38.51 [+33.73, +43.28]
+Seat-by-seat mean score and win rate:
+  OldAgg           s0 55.8 (27%), s1 55.3 (22%), s2 55.2 (26%), s3 55.7 (23%), s4 56.5 (26%)
+  Fraction         s0 70.9 (66%), s1 70.0 (67%), s2 71.7 (72%), s3 71.5 (69%), s4 71.2 (69%)
+  SmallBid         s0 33.5 (6%), s1 32.6 (4%), s2 32.8 (6%), s3 33.0 (6%), s4 32.8 (6%)
+  Myopic           s0 35.0 (4%), s1 34.2 (3%), s2 34.5 (3%), s3 35.2 (2%), s4 33.9 (1%)
+  Bot              s0 20.0 (0%), s1 20.0 (0%), s2 20.0 (0%), s3 20.0 (0%), s4 20.0 (0%)
+
+5p together new
+71.2s, 40 seeds, 1000 games
+Bot                                mean score   win rate
+VL                 41.97 [  39.85,   44.09]      20.5%
+Adaptive           51.26 [  48.60,   53.91]      58.1%
+Agg                34.04 [  32.31,   35.77]       8.0%
+Myopic             28.84 [  27.91,   29.78]       5.4%
+Fraction           37.10 [  36.16,   38.04]      10.5%
+Paired mean score minus the others (positive favors VL):
+  vs Adaptive           -9.29  [ -12.18,   -6.39]  CI below 0
+  vs Agg                +7.93  [  +6.43,   +9.43]  CI above 0
+  vs Myopic            +13.13  [ +10.70,  +15.56]  CI above 0
+  vs Fraction           +4.87  [  +3.07,   +6.68]  CI above 0
+Mean score by chart (seed-level 95% CI of the focus shown below):
+chart               VL      Adaptive           Agg        Myopic      Fraction
+A                38.59         47.05         36.02         30.86         36.55
+B                44.23         53.27         31.81         24.84         38.91
+C                32.66         37.43         30.41         30.86         33.94
+D                52.58         69.03         33.77         25.65         39.61
+E                41.82         49.52         38.18         32.00         36.48
+Paired chart gaps for VL:
+  A: | Adaptive -8.46 [-12.31, -4.61] | Agg +2.56 [+0.54, +4.58] | Myopic +7.73 [+4.29, +11.17] | Fraction +2.04 [-0.73, +4.81]
+  B: | Adaptive -9.04 [-13.06, -5.03] | Agg +12.41 [+10.18, +14.64] | Myopic +19.38 [+16.22, +22.55] | Fraction +5.31 [+2.60, +8.02]
+  C: | Adaptive -4.78 [-7.71, -1.84] | Agg +2.25 [+0.24, +4.26] | Myopic +1.79 [-0.78, +4.36] | Fraction -1.28 [-3.20, +0.64]
+  D: | Adaptive -16.45 [-23.00, -9.90] | Agg +18.81 [+15.21, +22.41] | Myopic +26.93 [+22.41, +31.45] | Fraction +12.96 [+8.90, +17.03]
+  E: | Adaptive -7.69 [-12.47, -2.92] | Agg +3.64 [+1.13, +6.15] | Myopic +9.82 [+5.50, +14.14] | Fraction +5.33 [+1.76, +8.91]
+Seat-by-seat mean score and win rate:
+  VL               s0 41.9 (21%), s1 41.9 (18%), s2 41.7 (20%), s3 41.6 (22%), s4 42.8 (22%)
+  Adaptive         s0 51.8 (57%), s1 50.2 (56%), s2 50.9 (58%), s3 51.5 (60%), s4 51.9 (60%)
+  Agg              s0 33.7 (7%), s1 33.8 (4%), s2 35.0 (10%), s3 33.7 (10%), s4 34.0 (8%)
+  Myopic           s0 28.6 (5%), s1 28.4 (4%), s2 29.2 (6%), s3 28.6 (7%), s4 29.4 (5%)
+  Fraction         s0 36.9 (14%), s1 36.9 (8%), s2 37.5 (10%), s3 37.0 (12%), s4 37.2 (9%)
+
+5p together old
+70.7s, 40 seeds, 1000 games
+Bot                                mean score   win rate
+VL                 49.64 [  47.09,   52.18]      52.5%
+Adaptive           42.33 [  40.92,   43.73]      23.9%
+Agg                34.25 [  31.71,   36.78]       9.7%
+Myopic             29.77 [  28.73,   30.80]       7.2%
+Fraction           37.08 [  36.17,   38.00]      10.4%
+Paired mean score minus the others (positive favors VL):
+  vs Adaptive           +7.31  [  +4.96,   +9.66]  CI above 0
+  vs Agg               +15.39  [ +12.86,  +17.92]  CI above 0
+  vs Myopic            +19.87  [ +16.92,  +22.82]  CI above 0
+  vs Fraction          +12.55  [ +10.14,  +14.97]  CI above 0
+Mean score by chart (seed-level 95% CI of the focus shown below):
+chart               VL      Adaptive           Agg        Myopic      Fraction
+A                50.07         41.14         31.98         32.74         36.20
+B                50.45         43.94         31.54         24.66         37.96
+C                38.25         34.96         25.44         32.81         35.80
+D                58.58         48.70         45.83         24.68         38.58
+E                50.83         42.91         36.45         33.93         36.88
+Paired chart gaps for VL:
+  A: | Adaptive +8.93 [+5.21, +12.66] | Agg +18.09 [+14.11, +22.08] | Myopic +17.33 [+12.77, +21.89] | Fraction +13.88 [+10.07, +17.68]
+  B: | Adaptive +6.51 [+3.68, +9.34] | Agg +18.91 [+15.75, +22.07] | Myopic +25.79 [+22.40, +29.18] | Fraction +12.48 [+9.84, +15.13]
+  C: | Adaptive +3.29 [+0.59, +5.98] | Agg +12.81 [+10.20, +15.42] | Myopic +5.44 [+1.50, +9.37] | Fraction +2.45 [-0.89, +5.78]
+  D: | Adaptive +9.88 [+5.34, +14.43] | Agg +12.75 [+8.20, +17.31] | Myopic +33.89 [+30.12, +37.67] | Fraction +20.00 [+16.45, +23.55]
+  E: | Adaptive +7.92 [+4.05, +11.80] | Agg +14.38 [+9.81, +18.95] | Myopic +16.90 [+11.86, +21.94] | Fraction +13.96 [+9.06, +18.85]
+Seat-by-seat mean score and win rate:
+  VL               s0 50.0 (57%), s1 49.0 (52%), s2 48.0 (48%), s3 50.5 (54%), s4 50.6 (51%)
+  Adaptive         s0 43.1 (26%), s1 41.2 (18%), s2 41.8 (22%), s3 43.1 (27%), s4 42.5 (27%)
+  Agg              s0 33.9 (8%), s1 33.6 (8%), s2 34.6 (12%), s3 34.9 (10%), s4 34.2 (8%)
+  Myopic           s0 30.4 (9%), s1 29.0 (4%), s2 30.1 (8%), s3 29.7 (6%), s4 29.6 (8%)
+  Fraction         s0 37.2 (12%), s1 36.9 (8%), s2 37.6 (12%), s3 36.5 (8%), s4 37.2 (10%)
+
+Paired VL − old on 3p standard
+  vs OldVL             -17.26  [ -20.54,  -13.98]  CI below 0
+  win rate  -45.0%  [ -53.0%,  -37.0%]  CI below 0
+  A: -17.87 [-21.83, -13.90]
+  B: -17.59 [-21.58, -13.61]
+  C: -11.50 [-15.50, -7.50]
+  D: -19.75 [-24.44, -15.06]
+  E: -19.57 [-24.35, -14.80]
+
+Paired Adaptive − old on 3p standard
+  vs OldAdaptive        -1.32  [  -2.31,   -0.33]  CI below 0
+  win rate   -2.3%  [  -5.0%,   +0.3%]  CI includes 0
+  A: -1.21 [-3.09, +0.67]
+  B: -0.27 [-1.92, +1.37]
+  C: -1.60 [-3.45, +0.25]
+  D: +0.24 [-1.66, +2.14]
+  E: -3.76 [-6.11, -1.41]
+
+Paired Agg − old on 3p standard
+  vs OldAgg             -3.90  [  -6.33,   -1.47]  CI below 0
+  win rate   -6.0%  [ -11.3%,   -0.7%]  CI below 0
+  A: -2.89 [-5.95, +0.17]
+  B: -8.27 [-11.14, -5.40]
+  C: +9.47 [+6.20, +12.75]
+  D: -13.71 [-18.78, -8.64]
+  E: -4.12 [-7.65, -0.58]
+
+Paired together VL 3p
+  vs VL                 -9.43  [ -12.13,   -6.72]  CI below 0
+  win rate  -27.8%  [ -34.9%,  -20.8%]  CI below 0
+  A: -16.46 [-20.63, -12.29]
+  B: -4.88 [-9.52, -0.23]
+  C: -13.44 [-16.98, -9.90]
+  D: +0.97 [-3.54, +5.49]
+  E: -13.32 [-17.66, -8.99]
+
+Paired together Adaptive 3p
+  vs Adaptive           +6.46  [  +3.07,   +9.85]  CI above 0
+  win rate  +20.8%  [ +11.5%,  +30.1%]  CI above 0
+  A: +4.87 [-0.34, +10.07]
+  B: +10.26 [+6.05, +14.46]
+  C: +4.39 [-0.81, +9.60]
+  D: +6.88 [+1.90, +11.87]
+  E: +5.90 [+1.36, +10.44]
+
+Paired together Agg 3p
+  vs Agg                +0.84  [  -1.13,   +2.82]  CI includes 0
+  win rate   +5.7%  [  +1.0%,  +10.3%]  CI above 0
+  A: +5.60 [+1.87, +9.33]
+  B: -5.16 [-8.01, -2.31]
+  C: +4.88 [+1.07, +8.68]
+  D: -4.91 [-7.44, -2.38]
+  E: +3.81 [+0.41, +7.20]
+
+Paired VL − old on 4p standard
+  vs OldVL             -14.45  [ -17.84,  -11.06]  CI below 0
+  win rate  -42.8%  [ -51.1%,  -34.4%]  CI below 0
+  A: -15.79 [-20.30, -11.28]
+  B: -14.98 [-19.74, -10.22]
+  C: -8.93 [-12.76, -5.09]
+  D: -16.46 [-21.30, -11.63]
+  E: -16.07 [-20.83, -11.32]
+
+Paired Adaptive − old on 4p standard
+  vs OldAdaptive        +0.03  [  -1.22,   +1.27]  CI includes 0
+  win rate   +1.0%  [  -0.5%,   +2.5%]  CI includes 0
+  A: -2.44 [-4.96, +0.09]
+  B: +1.90 [+0.51, +3.29]
+  C: +1.15 [-0.37, +2.67]
+  D: +1.09 [-0.67, +2.84]
+  E: -1.57 [-4.57, +1.42]
+
+Paired Agg − old on 4p standard
+  vs OldAgg             -4.92  [  -6.88,   -2.96]  CI below 0
+  win rate   -8.6%  [ -12.7%,   -4.5%]  CI below 0
+  A: -5.58 [-8.44, -2.71]
+  B: -6.52 [-9.98, -3.06]
+  C: +3.62 [+1.10, +6.15]
+  D: -12.77 [-16.45, -9.09]
+  E: -3.37 [-6.46, -0.27]
+
+Paired together VL 4p
+  vs VL                 -5.09  [  -7.07,   -3.11]  CI below 0
+  win rate  -17.1%  [ -24.8%,   -9.5%]  CI below 0
+  A: -8.50 [-11.45, -5.55]
+  B: -0.76 [-3.33, +1.80]
+  C: -8.87 [-11.25, -6.49]
+  D: +1.48 [-2.24, +5.19]
+  E: -8.80 [-13.06, -4.54]
+
+Paired together Adaptive 4p
+  vs Adaptive           +2.69  [  +0.56,   +4.83]  CI above 0
+  win rate  +15.6%  [  +7.3%,  +23.9%]  CI above 0
+  A: +2.16 [-1.41, +5.74]
+  B: +1.17 [-1.62, +3.96]
+  C: +0.56 [-2.85, +3.98]
+  D: +5.39 [+1.39, +9.38]
+  E: +4.19 [+0.62, +7.76]
+
+Paired together Agg 4p
+  vs Agg                +3.23  [  +1.93,   +4.54]  CI above 0
+  win rate   +3.8%  [  +1.1%,   +6.4%]  CI above 0
+  A: +6.29 [+4.17, +8.42]
+  B: +2.09 [+0.20, +3.98]
+  C: +7.19 [+5.21, +9.18]
+  D: -3.73 [-6.79, -0.67]
+  E: +4.32 [+2.09, +6.55]
+
+Paired VL − old on 5p standard
+  vs OldVL             -11.08  [ -13.95,   -8.20]  CI below 0
+  win rate  -34.6%  [ -43.1%,  -26.1%]  CI below 0
+  A: -10.41 [-14.16, -6.67]
+  B: -11.66 [-15.71, -7.61]
+  C: -12.06 [-15.57, -8.55]
+  D: -8.13 [-11.67, -4.59]
+  E: -13.12 [-17.88, -8.35]
+
+Paired Adaptive − old on 5p standard
+  vs OldAdaptive        +0.46  [  -0.66,   +1.57]  CI includes 0
+  win rate   +0.5%  [  -0.4%,   +1.4%]  CI includes 0
+  A: +1.01 [-1.64, +3.67]
+  B: +0.80 [-0.63, +2.22]
+  C: -0.08 [-1.53, +1.36]
+  D: +1.27 [-0.96, +3.49]
+  E: -0.70 [-3.11, +1.70]
+
+Paired Agg − old on 5p standard
+  vs OldAgg             -6.11  [  -8.14,   -4.09]  CI below 0
+  win rate  -12.4%  [ -17.4%,   -7.4%]  CI below 0
+  A: -6.07 [-8.69, -3.44]
+  B: -9.99 [-12.82, -7.16]
+  C: +1.54 [-1.21, +4.29]
+  D: -7.52 [-11.83, -3.21]
+  E: -8.52 [-11.36, -5.68]
+
+Paired together VL 5p
+  vs VL                 -7.66  [ -10.07,   -5.26]  CI below 0
+  win rate  -32.0%  [ -40.7%,  -23.3%]  CI below 0
+  A: -11.49 [-15.09, -7.88]
+  B: -6.22 [-9.31, -3.14]
+  C: -5.60 [-7.78, -3.41]
+  D: -6.00 [-10.54, -1.46]
+  E: -9.01 [-12.55, -5.47]
+
+Paired together Adaptive 5p
+  vs Adaptive           +8.93  [  +6.83,  +11.03]  CI above 0
+  win rate  +34.2%  [ +27.7%,  +40.7%]  CI above 0
+  A: +5.91 [+2.92, +8.90]
+  B: +9.33 [+6.38, +12.28]
+  C: +2.46 [-0.06, +4.99]
+  D: +20.34 [+15.46, +25.21]
+  E: +6.61 [+3.25, +9.97]
+
+Paired together Agg 5p
+  vs Agg                -0.21  [  -1.51,   +1.10]  CI includes 0
+  win rate   -1.7%  [  -5.2%,   +1.8%]  CI includes 0
+  A: +4.05 [+2.04, +6.06]
+  B: +0.27 [-1.82, +2.37]
+  C: +4.96 [+3.61, +6.32]
+  D: -12.06 [-14.84, -9.27]
+  E: +1.73 [-0.23, +3.69]

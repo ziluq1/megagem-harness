@@ -256,8 +256,10 @@ def _loan_surplus(
     """Score cost of the bid, plus the option value of the extra coins.
 
     Principal is repaid at the end, so borrowed coins are not worth face
-    value. Early, they are worth about ``lam`` each. Late, they are worth
-    the gem surplus they can still buy.
+    value. Early in the game they are priced at ``lam`` each: a measured
+    comparison showed that refusing those loans while flush costs more than
+    ten points against ordinary opponents. Later, extra coins are worth
+    something only when the bankroll cannot cover the gems still showing.
     """
     extra = loan_value - bid
     if extra <= 0:
@@ -305,6 +307,8 @@ def _opponent_target(
         return 0, 0.0
     if card.type is AuctionType.AUCTION:
         # Face value at the current display, our fair value, and contested missions.
+        # Replacing the face with the conditional expectation was tested on
+        # seeds 3600–3639 and lost on chart D: rivals do bid the printed chart.
         signal = max(0.0, 0.45 * naive + 0.55 * gem_value + 0.35 * rival_missions)
         cap = min(budget, max(0, math.ceil(signal)))
         mean = min(float(cap), bid_fraction * signal)
@@ -456,7 +460,13 @@ def select_bid(
         elif card.type is AuctionType.INVEST:
             surplus = card.value - lam_invest * bid
         else:
-            surplus = _loan_surplus(info, card.value, bid, lam_treasure, showing_value)
+            surplus = _loan_surplus(
+                info,
+                card.value,
+                bid,
+                lam_treasure,
+                showing_value,
+            )
         utility = probability * surplus
         if utility > best_utility + 1e-9:
             best_utility = utility

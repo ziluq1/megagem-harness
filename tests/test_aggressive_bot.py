@@ -205,6 +205,7 @@ class CoverAndLoanTests(unittest.TestCase):
         self.assertEqual(bot.get_bid(planned), bid)
         quiet = AggressiveBot()
         quiet.use_liquidity = False
+        quiet.use_valued_loans = False
         self.assertEqual(quiet.get_bid(planned), 0)
 
 
@@ -253,10 +254,11 @@ class RevealEndgameAndSwitchTests(unittest.TestCase):
         loan_bid = bot.get_bid(loan)
         self.assertGreaterEqual(loan_bid, 0)
         self.assertLessEqual(loan_bid, 11)
-        decision, net = loan_decision(loan, missions=True)
-        if loan_bid > 0:
-            self.assertGreater(net, 0.0)
-            self.assertEqual(loan_bid, decision)
+        if bot.use_liquidity:
+            decision, net = loan_decision(loan, missions=True)
+            if loan_bid > 0:
+                self.assertGreater(net, 0.0)
+                self.assertEqual(loan_bid, decision)
 
     def test_each_feature_can_be_disabled(self) -> None:
         mission = MissionCard(10, {BLUE: 1})
