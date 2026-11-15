@@ -1,0 +1,743 @@
+AdaptiveBot evaluation
+Seeds 1000–1199 (200), charts A–E, seats rotated.
+Means and 95% CIs are across seeds, after averaging charts and seats.
+A win is any share of the high score.
+Wall clock 676s.
+
+1. Head-to-head 3p  Adaptive vs VL vs Myopic
+231.9s, 200 seeds, 3000 games
+Bot                                mean score   win rate
+Adaptive           79.93 [  78.32,   81.54]      50.0%
+VL                 77.49 [  75.92,   79.06]      40.6%
+Myopic             55.08 [  54.14,   56.02]      11.2%
+Paired mean score minus the others (positive favors Adaptive):
+  vs VL                 +2.44  [  +1.12,   +3.77]  CI above 0
+  vs Myopic            +24.85  [ +22.62,  +27.09]  CI above 0
+Mean score by chart (seed-level 95% CI of the focus shown below):
+chart         Adaptive            VL        Myopic
+A                77.36         76.69         59.35
+B                78.23         78.60         48.34
+C                63.40         67.79         57.30
+D                98.23         85.34         49.59
+E                82.44         79.03         60.82
+Paired chart gaps for Adaptive:
+  A: | VL +0.67 [-1.29, +2.64] | Myopic +18.01 [+15.02, +21.00]
+  B: | VL -0.37 [-2.94, +2.20] | Myopic +29.89 [+27.77, +32.02]
+  C: | VL -4.39 [-6.25, -2.53] | Myopic +6.09 [+3.53, +8.66]
+  D: | VL +12.89 [+10.29, +15.49] | Myopic +48.64 [+46.11, +51.17]
+  E: | VL +3.42 [+0.82, +6.01] | Myopic +21.62 [+17.72, +25.53]
+Seat-by-seat mean score and win rate:
+  Adaptive         s0 79.7 (51%), s1 79.5 (50%), s2 80.6 (49%)
+  VL               s0 77.1 (42%), s1 77.9 (40%), s2 77.5 (40%)
+  Myopic           s0 55.3 (12%), s1 55.0 (11%), s2 55.0 (11%)
+
+3. vs Zero 3p  Adaptive
+190.8s, 200 seeds, 3000 games
+Bot                                mean score   win rate
+Adaptive          204.40 [ 202.55,  206.24]     100.0%
+Zero               35.74 [  35.61,   35.86]       0.0%
+Paired mean score minus the others (positive favors Adaptive):
+  vs Zero             +168.66  [+166.80, +170.53]  CI above 0
+Mean score by chart (seed-level 95% CI of the focus shown below):
+chart         Adaptive          Zero
+A               201.06         35.65
+B               203.96         35.30
+C               164.73         36.88
+D               241.95         35.22
+E               210.30         35.63
+Paired chart gaps for Adaptive:
+  A: | Zero +165.41 [+162.66, +168.16]
+  B: | Zero +168.66 [+166.40, +170.91]
+  C: | Zero +127.85 [+125.35, +130.36]
+  D: | Zero +206.73 [+204.86, +208.59]
+  E: | Zero +174.66 [+168.91, +180.42]
+Seat-by-seat mean score and win rate:
+  Adaptive         s0 204.4 (100%), s1 204.3 (100%), s2 204.4 (100%)
+
+3. vs Zero 3p  VL
+161.1s, 200 seeds, 3000 games
+Bot                                mean score   win rate
+VL                142.78 [ 141.27,  144.29]     100.0%
+Zero               51.44 [  50.37,   52.51]       0.0%
+Paired mean score minus the others (positive favors VL):
+  vs Zero              +91.34  [ +89.45,  +93.23]  CI above 0
+Mean score by chart (seed-level 95% CI of the focus shown below):
+chart               VL          Zero
+A               147.31         50.29
+B               134.30         50.59
+C               133.28         41.27
+D               148.85         61.10
+E               150.16         53.95
+Paired chart gaps for VL:
+  A: | Zero +97.02 [+94.47, +99.56]
+  B: | Zero +83.71 [+81.47, +85.96]
+  C: | Zero +92.01 [+90.26, +93.77]
+  D: | Zero +87.75 [+84.99, +90.51]
+  E: | Zero +96.21 [+91.62, +100.80]
+Seat-by-seat mean score and win rate:
+  VL               s0 142.6 (100%), s1 142.6 (100%), s2 143.1 (100%)
+
+3. vs Over 3p  Adaptive
+190.8s, 200 seeds, 3000 games
+Bot                                mean score   win rate
+Adaptive          171.87 [ 169.76,  173.98]     100.0%
+Over               10.08 [   8.63,   11.53]       0.0%
+Paired mean score minus the others (positive favors Adaptive):
+  vs Over             +161.79  [+158.99, +164.60]  CI above 0
+Mean score by chart (seed-level 95% CI of the focus shown below):
+chart         Adaptive          Over
+A               175.15          9.67
+B               162.75          9.86
+C               137.97          9.95
+D               198.71         10.72
+E               184.77         10.20
+Paired chart gaps for Adaptive:
+  A: | Over +165.48 [+161.81, +169.16]
+  B: | Over +152.89 [+149.71, +156.07]
+  C: | Over +128.02 [+124.48, +131.56]
+  D: | Over +187.99 [+184.60, +191.38]
+  E: | Over +174.57 [+169.72, +179.42]
+Seat-by-seat mean score and win rate:
+  Adaptive         s0 171.9 (100%), s1 171.7 (100%), s2 172.1 (100%)
+
+3. vs Over 3p  VL
+190.7s, 200 seeds, 3000 games
+Bot                                mean score   win rate
+VL                173.25 [ 171.17,  175.33]     100.0%
+Over                9.75 [   8.30,   11.19]       0.0%
+Paired mean score minus the others (positive favors VL):
+  vs Over             +163.50  [+160.73, +166.28]  CI above 0
+Mean score by chart (seed-level 95% CI of the focus shown below):
+chart               VL          Over
+A               176.51          9.34
+B               163.84          9.73
+C               138.75          9.82
+D               201.12         10.06
+E               186.03          9.78
+Paired chart gaps for VL:
+  A: | Over +167.17 [+163.56, +170.78]
+  B: | Over +154.11 [+151.13, +157.10]
+  C: | Over +128.93 [+125.47, +132.39]
+  D: | Over +191.06 [+188.09, +194.02]
+  E: | Over +176.24 [+171.34, +181.15]
+Seat-by-seat mean score and win rate:
+  VL               s0 173.1 (100%), s1 173.4 (100%), s2 173.3 (100%)
+
+3. vs Random 3p  Adaptive
+183.3s, 200 seeds, 3000 games
+Bot                                mean score   win rate
+Adaptive          144.41 [ 142.23,  146.60]      99.7%
+Random             21.93 [  20.49,   23.37]       0.4%
+Paired mean score minus the others (positive favors Adaptive):
+  vs Random           +122.49  [+119.68, +125.29]  CI above 0
+Mean score by chart (seed-level 95% CI of the focus shown below):
+chart         Adaptive        Random
+A               147.08         21.92
+B               137.92         20.73
+C               124.78         15.42
+D               159.30         27.82
+E               152.99         23.74
+Paired chart gaps for Adaptive:
+  A: | Random +125.16 [+121.40, +128.92]
+  B: | Random +117.19 [+113.76, +120.62]
+  C: | Random +109.36 [+105.95, +112.77]
+  D: | Random +131.48 [+127.12, +135.85]
+  E: | Random +129.25 [+124.55, +133.94]
+Seat-by-seat mean score and win rate:
+  Adaptive         s0 144.2 (100%), s1 144.2 (100%), s2 144.9 (100%)
+
+3. vs Random 3p  VL
+184.8s, 200 seeds, 3000 games
+Bot                                mean score   win rate
+VL                143.73 [ 141.73,  145.74]      99.7%
+Random             20.52 [  19.05,   21.99]       0.3%
+Paired mean score minus the others (positive favors VL):
+  vs Random           +123.21  [+120.59, +125.84]  CI above 0
+Mean score by chart (seed-level 95% CI of the focus shown below):
+chart               VL        Random
+A               147.20         19.91
+B               138.67         18.30
+C               126.81         13.36
+D               155.91         27.64
+E               150.07         23.39
+Paired chart gaps for VL:
+  A: | Random +127.29 [+123.69, +130.89]
+  B: | Random +120.38 [+116.91, +123.85]
+  C: | Random +113.45 [+110.06, +116.84]
+  D: | Random +128.28 [+123.99, +132.56]
+  E: | Random +126.68 [+122.46, +130.89]
+Seat-by-seat mean score and win rate:
+  VL               s0 143.3 (100%), s1 143.7 (100%), s2 144.2 (100%)
+
+3. vs Mission 3p  Adaptive
+192.2s, 200 seeds, 3000 games
+Bot                                mean score   win rate
+Adaptive          196.39 [ 193.87,  198.91]     100.0%
+Mission            34.50 [  34.06,   34.95]       0.0%
+Paired mean score minus the others (positive favors Adaptive):
+  vs Mission          +161.89  [+159.51, +164.27]  CI above 0
+Mean score by chart (seed-level 95% CI of the focus shown below):
+chart         Adaptive       Mission
+A               193.46         34.76
+B               196.28         33.58
+C               157.40         34.38
+D               233.05         34.45
+E               201.77         35.35
+Paired chart gaps for Adaptive:
+  A: | Mission +158.70 [+155.37, +162.03]
+  B: | Mission +162.70 [+160.07, +165.33]
+  C: | Mission +123.02 [+120.13, +125.91]
+  D: | Mission +198.60 [+195.85, +201.34]
+  E: | Mission +166.42 [+160.52, +172.32]
+Seat-by-seat mean score and win rate:
+  Adaptive         s0 196.3 (100%), s1 196.2 (100%), s2 196.7 (100%)
+
+3. vs Mission 3p  VL
+166.2s, 200 seeds, 3000 games
+Bot                                mean score   win rate
+VL                141.02 [ 139.36,  142.68]     100.0%
+Mission            45.84 [  44.58,   47.11]       0.0%
+Paired mean score minus the others (positive favors VL):
+  vs Mission           +95.18  [ +93.20,  +97.15]  CI above 0
+Mean score by chart (seed-level 95% CI of the focus shown below):
+chart               VL       Mission
+A               145.45         45.33
+B               133.57         45.06
+C               130.38         38.01
+D               147.75         52.97
+E               147.96         47.85
+Paired chart gaps for VL:
+  A: | Mission +100.12 [+97.61, +102.62]
+  B: | Mission +88.51 [+86.21, +90.80]
+  C: | Mission +92.38 [+90.38, +94.37]
+  D: | Mission +94.78 [+91.83, +97.73]
+  E: | Mission +100.11 [+95.51, +104.70]
+Seat-by-seat mean score and win rate:
+  VL               s0 140.9 (100%), s1 140.9 (100%), s2 141.3 (100%)
+
+1. Head-to-head 4p  Adaptive vs VL vs Myopic
+382.3s, 200 seeds, 4000 games
+Bot                                mean score   win rate
+Adaptive           50.03 [  49.11,   50.95]      32.5%
+VL#1               49.22 [  48.34,   50.09]      27.6%
+Myopic             38.38 [  37.81,   38.94]       9.4%
+VL#2               51.10 [  50.18,   52.02]      34.5%
+Paired mean score minus the others (positive favors Adaptive):
+  vs VL#1               +0.82  [  +0.05,   +1.58]  CI above 0
+  vs Myopic            +11.66  [ +10.45,  +12.86]  CI above 0
+  vs VL#2               -1.07  [  -1.82,   -0.32]  CI below 0
+Mean score by chart (seed-level 95% CI of the focus shown below):
+chart         Adaptive          VL#1        Myopic          VL#2
+A                51.53         50.47         41.75         52.80
+B                46.14         47.26         32.90         49.41
+C                44.05         43.53         40.91         43.68
+D                56.45         53.88         33.90         55.79
+E                52.01         50.94         42.42         53.82
+Paired chart gaps for Adaptive:
+  A: | VL#1 +1.06 [-0.21, +2.33] | Myopic +9.77 [+7.95, +11.60] | VL#2 -1.27 [-2.58, +0.05]
+  B: | VL#1 -1.12 [-2.56, +0.32] | Myopic +13.24 [+11.70, +14.78] | VL#2 -3.28 [-4.70, -1.86]
+  C: | VL#1 +0.52 [-0.61, +1.66] | Myopic +3.14 [+1.37, +4.92] | VL#2 +0.38 [-0.80, +1.55]
+  D: | VL#1 +2.56 [+1.03, +4.09] | Myopic +22.55 [+20.98, +24.12] | VL#2 +0.65 [-0.80, +2.11]
+  E: | VL#1 +1.07 [-0.39, +2.53] | Myopic +9.59 [+7.29, +11.89] | VL#2 -1.82 [-3.48, -0.15]
+Seat-by-seat mean score and win rate:
+  Adaptive         s0 50.2 (34%), s1 50.2 (33%), s2 50.1 (31%), s3 49.6 (31%)
+  VL#1             s0 49.4 (30%), s1 49.0 (26%), s2 49.0 (27%), s3 49.4 (28%)
+  Myopic           s0 38.3 (9%), s1 38.5 (10%), s2 38.5 (9%), s3 38.2 (10%)
+  VL#2             s0 51.0 (34%), s1 51.1 (36%), s2 51.1 (34%), s3 51.2 (35%)
+
+3. vs Zero 4p  Adaptive
+302.7s, 200 seeds, 4000 games
+Bot                                mean score   win rate
+Adaptive          171.04 [ 169.30,  172.79]     100.0%
+Zero               27.24 [  26.78,   27.70]       0.0%
+Paired mean score minus the others (positive favors Adaptive):
+  vs Zero             +143.80  [+141.92, +145.69]  CI above 0
+Mean score by chart (seed-level 95% CI of the focus shown below):
+chart         Adaptive          Zero
+A               168.98         29.00
+B               169.19         25.48
+C               143.78         27.50
+D               199.75         25.78
+E               173.51         28.44
+Paired chart gaps for Adaptive:
+  A: | Zero +139.98 [+136.96, +143.00]
+  B: | Zero +143.71 [+141.58, +145.84]
+  C: | Zero +116.28 [+113.91, +118.66]
+  D: | Zero +173.97 [+171.69, +176.24]
+  E: | Zero +145.08 [+139.79, +150.36]
+Seat-by-seat mean score and win rate:
+  Adaptive         s0 171.3 (100%), s1 170.8 (100%), s2 171.2 (100%), s3 170.9 (100%)
+
+3. vs Zero 4p  VL
+270.0s, 200 seeds, 4000 games
+Bot                                mean score   win rate
+VL                112.39 [ 110.81,  113.98]      99.3%
+Zero               41.42 [  40.54,   42.29]       0.7%
+Paired mean score minus the others (positive favors VL):
+  vs Zero              +70.98  [ +68.93,  +73.03]  CI above 0
+Mean score by chart (seed-level 95% CI of the focus shown below):
+chart               VL          Zero
+A               119.16         42.71
+B               102.46         38.82
+C               109.80         35.54
+D               111.37         46.41
+E               119.19         43.59
+Paired chart gaps for VL:
+  A: | Zero +76.45 [+73.52, +79.38]
+  B: | Zero +63.64 [+61.36, +65.91]
+  C: | Zero +74.26 [+71.93, +76.59]
+  D: | Zero +64.95 [+62.21, +67.69]
+  E: | Zero +75.60 [+71.60, +79.60]
+Seat-by-seat mean score and win rate:
+  VL               s0 112.6 (99%), s1 112.3 (99%), s2 112.5 (99%), s3 112.2 (99%)
+
+3. vs Over 4p  Adaptive
+311.2s, 200 seeds, 4000 games
+Bot                                mean score   win rate
+Adaptive          140.53 [ 138.25,  142.81]     100.0%
+Over               10.91 [   9.84,   11.97]       0.0%
+Paired mean score minus the others (positive favors Adaptive):
+  vs Over             +129.63  [+126.89, +132.37]  CI above 0
+Mean score by chart (seed-level 95% CI of the focus shown below):
+chart         Adaptive          Over
+A               149.81         11.59
+B               126.11          9.70
+C               121.31          9.61
+D               154.01         11.63
+E               151.43         12.00
+Paired chart gaps for Adaptive:
+  A: | Over +138.22 [+134.53, +141.91]
+  B: | Over +116.41 [+113.69, +119.14]
+  C: | Over +111.70 [+108.48, +114.92]
+  D: | Over +142.38 [+139.26, +145.51]
+  E: | Over +139.43 [+134.92, +143.93]
+Seat-by-seat mean score and win rate:
+  Adaptive         s0 140.9 (100%), s1 140.7 (100%), s2 140.2 (100%), s3 140.3 (100%)
+
+3. vs Over 4p  VL
+299.9s, 200 seeds, 4000 games
+Bot                                mean score   win rate
+VL                141.38 [ 139.18,  143.58]     100.0%
+Over               10.37 [   9.31,   11.43]       0.0%
+Paired mean score minus the others (positive favors VL):
+  vs Over             +131.01  [+128.35, +133.66]  CI above 0
+Mean score by chart (seed-level 95% CI of the focus shown below):
+chart               VL          Over
+A               150.39         11.11
+B               127.65          8.96
+C               122.86          8.98
+D               154.90         11.05
+E               151.12         11.76
+Paired chart gaps for VL:
+  A: | Over +139.28 [+135.67, +142.88]
+  B: | Over +118.68 [+116.02, +121.35]
+  C: | Over +113.88 [+110.68, +117.07]
+  D: | Over +143.84 [+140.89, +146.79]
+  E: | Over +139.36 [+134.91, +143.81]
+Seat-by-seat mean score and win rate:
+  VL               s0 141.4 (100%), s1 141.5 (100%), s2 141.4 (100%), s3 141.3 (100%)
+
+3. vs Random 4p  Adaptive
+280.4s, 200 seeds, 4000 games
+Bot                                mean score   win rate
+Adaptive          112.56 [ 110.59,  114.52]      98.7%
+Random             19.49 [  18.47,   20.51]       1.4%
+Paired mean score minus the others (positive favors Adaptive):
+  vs Random            +93.07  [ +90.72,  +95.42]  CI above 0
+Mean score by chart (seed-level 95% CI of the focus shown below):
+chart         Adaptive        Random
+A               119.28         21.09
+B               101.79         17.13
+C               100.59         16.05
+D               121.48         21.85
+E               119.64         21.33
+Paired chart gaps for Adaptive:
+  A: | Random +98.20 [+94.87, +101.53]
+  B: | Random +84.66 [+81.93, +87.39]
+  C: | Random +84.54 [+81.45, +87.63]
+  D: | Random +99.63 [+96.35, +102.92]
+  E: | Random +98.31 [+94.48, +102.14]
+Seat-by-seat mean score and win rate:
+  Adaptive         s0 113.0 (99%), s1 112.6 (99%), s2 111.9 (99%), s3 112.8 (98%)
+
+3. vs Random 4p  VL
+260.5s, 200 seeds, 4000 games
+Bot                                mean score   win rate
+VL                102.75 [ 101.15,  104.35]      97.3%
+Random             21.14 [  20.10,   22.18]       2.9%
+Paired mean score minus the others (positive favors VL):
+  vs Random            +81.61  [ +79.65,  +83.58]  CI above 0
+Mean score by chart (seed-level 95% CI of the focus shown below):
+chart               VL        Random
+A               108.26         23.20
+B                96.87         17.06
+C                97.44         15.50
+D               105.64         25.47
+E               105.55         24.47
+Paired chart gaps for VL:
+  A: | Random +85.05 [+81.99, +88.11]
+  B: | Random +79.81 [+77.27, +82.35]
+  C: | Random +81.94 [+79.27, +84.62]
+  D: | Random +80.17 [+77.28, +83.07]
+  E: | Random +81.08 [+77.83, +84.33]
+Seat-by-seat mean score and win rate:
+  VL               s0 102.3 (98%), s1 101.9 (97%), s2 103.6 (98%), s3 103.2 (97%)
+
+3. vs Mission 4p  Adaptive
+275.9s, 200 seeds, 4000 games
+Bot                                mean score   win rate
+Adaptive          165.13 [ 162.75,  167.51]     100.0%
+Mission            26.90 [  26.51,   27.30]       0.0%
+Paired mean score minus the others (positive favors Adaptive):
+  vs Mission          +138.22  [+135.80, +140.64]  CI above 0
+Mean score by chart (seed-level 95% CI of the focus shown below):
+chart         Adaptive       Mission
+A               164.09         28.49
+B               162.47         25.11
+C               138.00         26.95
+D               192.69         25.92
+E               168.40         28.05
+Paired chart gaps for Adaptive:
+  A: | Mission +135.60 [+132.21, +138.98]
+  B: | Mission +137.36 [+134.82, +139.91]
+  C: | Mission +111.05 [+108.12, +113.97]
+  D: | Mission +166.76 [+163.81, +169.71]
+  E: | Mission +140.34 [+134.93, +145.75]
+Seat-by-seat mean score and win rate:
+  Adaptive         s0 165.4 (100%), s1 164.7 (100%), s2 165.5 (100%), s3 164.9 (100%)
+
+3. vs Mission 4p  VL
+259.0s, 200 seeds, 4000 games
+Bot                                mean score   win rate
+VL                107.53 [ 105.71,  109.36]      99.3%
+Mission            37.92 [  37.13,   38.70]       0.9%
+Paired mean score minus the others (positive favors VL):
+  vs Mission           +69.61  [ +67.63,  +71.59]  CI above 0
+Mean score by chart (seed-level 95% CI of the focus shown below):
+chart               VL       Mission
+A               113.45         39.34
+B                98.85         35.16
+C               104.92         32.85
+D               106.54         42.18
+E               113.90         40.06
+Paired chart gaps for VL:
+  A: | Mission +74.11 [+71.17, +77.05]
+  B: | Mission +63.69 [+61.63, +65.75]
+  C: | Mission +72.07 [+69.65, +74.49]
+  D: | Mission +64.36 [+61.89, +66.83]
+  E: | Mission +73.84 [+70.05, +77.63]
+Seat-by-seat mean score and win rate:
+  VL               s0 107.7 (99%), s1 107.6 (100%), s2 107.3 (99%), s3 107.5 (100%)
+
+1. Head-to-head 5p  Adaptive vs VL vs Myopic
+485.5s, 200 seeds, 5000 games
+Bot                                mean score   win rate
+Adaptive           43.96 [  42.88,   45.03]      29.6%
+VL#1               44.29 [  43.38,   45.20]      29.6%
+Myopic#1           29.75 [  29.41,   30.09]       5.5%
+VL#2               45.22 [  44.28,   46.15]      33.6%
+Myopic#2           29.65 [  29.31,   29.98]       5.5%
+Paired mean score minus the others (positive favors Adaptive):
+  vs VL#1               -0.33  [  -1.28,   +0.62]  CI includes 0
+  vs Myopic#1          +14.21  [ +13.08,  +15.33]  CI above 0
+  vs VL#2               -1.26  [  -2.16,   -0.36]  CI below 0
+  vs Myopic#2          +14.31  [ +13.17,  +15.45]  CI above 0
+Mean score by chart (seed-level 95% CI of the focus shown below):
+chart         Adaptive          VL#1      Myopic#1          VL#2      Myopic#2
+A                42.58         43.48         31.66         44.41         31.74
+B                43.15         44.27         26.11         45.35         25.73
+C                33.63         35.64         31.27         34.98         31.37
+D                54.75         52.05         26.73         54.30         26.86
+E                45.66         46.00         32.98         47.05         32.54
+Paired chart gaps for Adaptive:
+  A: | VL#1 -0.90 [-2.20, +0.40] | Myopic#1 +10.92 [+9.38, +12.46] | VL#2 -1.83 [-2.91, -0.75] | Myopic#2 +10.84 [+9.31, +12.37]
+  B: | VL#1 -1.12 [-2.59, +0.35] | Myopic#1 +17.05 [+15.66, +18.43] | VL#2 -2.20 [-3.59, -0.80] | Myopic#2 +17.43 [+16.11, +18.74]
+  C: | VL#1 -2.01 [-3.03, -0.98] | Myopic#1 +2.37 [+1.07, +3.66] | VL#2 -1.34 [-2.35, -0.33] | Myopic#2 +2.27 [+0.97, +3.56]
+  D: | VL#1 +2.71 [+0.71, +4.70] | Myopic#1 +28.02 [+26.24, +29.79] | VL#2 +0.45 [-1.56, +2.46] | Myopic#2 +27.90 [+26.11, +29.68]
+  E: | VL#1 -0.33 [-2.01, +1.34] | Myopic#1 +12.68 [+10.70, +14.66] | VL#2 -1.39 [-3.00, +0.23] | Myopic#2 +13.12 [+11.09, +15.16]
+Seat-by-seat mean score and win rate:
+  Adaptive         s0 43.3 (28%), s1 44.1 (30%), s2 44.0 (30%), s3 44.4 (31%), s4 44.0 (29%)
+  VL#1             s0 44.4 (30%), s1 44.5 (30%), s2 44.0 (30%), s3 44.5 (30%), s4 44.1 (29%)
+  Myopic#1         s0 29.3 (5%), s1 29.7 (5%), s2 30.0 (6%), s3 30.1 (6%), s4 29.7 (5%)
+  VL#2             s0 44.9 (33%), s1 45.3 (34%), s2 45.4 (34%), s3 45.7 (34%), s4 44.8 (32%)
+  Myopic#2         s0 29.4 (6%), s1 29.8 (5%), s2 30.0 (7%), s3 29.6 (5%), s4 29.4 (6%)
+
+3. vs Zero 5p  Adaptive
+416.3s, 200 seeds, 5000 games
+Bot                                mean score   win rate
+Adaptive          164.65 [ 162.49,  166.81]      99.9%
+Zero               24.14 [  23.51,   24.78]       0.2%
+Paired mean score minus the others (positive favors Adaptive):
+  vs Zero             +140.51  [+137.92, +143.10]  CI above 0
+Mean score by chart (seed-level 95% CI of the focus shown below):
+chart         Adaptive          Zero
+A               152.31         26.19
+B               176.10         21.33
+C               129.22         23.88
+D               206.74         22.23
+E               158.90         27.10
+Paired chart gaps for Adaptive:
+  A: | Zero +126.12 [+122.36, +129.88]
+  B: | Zero +154.77 [+151.89, +157.65]
+  C: | Zero +105.33 [+102.87, +107.80]
+  D: | Zero +184.51 [+181.12, +187.90]
+  E: | Zero +131.81 [+125.93, +137.69]
+Seat-by-seat mean score and win rate:
+  Adaptive         s0 163.6 (100%), s1 165.1 (100%), s2 164.6 (100%), s3 165.1 (100%), s4 164.9 (100%)
+
+3. vs Zero 5p  VL
+384.9s, 200 seeds, 5000 games
+Bot                                mean score   win rate
+VL                 99.33 [  97.58,  101.08]      97.5%
+Zero               37.29 [  36.61,   37.97]       2.6%
+Paired mean score minus the others (positive favors VL):
+  vs Zero              +62.04  [ +59.91,  +64.17]  CI above 0
+Mean score by chart (seed-level 95% CI of the focus shown below):
+chart               VL          Zero
+A               102.80         37.10
+B                92.52         36.53
+C                96.37         30.30
+D               100.88         43.28
+E               104.08         39.24
+Paired chart gaps for VL:
+  A: | Zero +65.70 [+62.79, +68.62]
+  B: | Zero +55.99 [+53.68, +58.31]
+  C: | Zero +66.07 [+63.61, +68.53]
+  D: | Zero +57.61 [+54.76, +60.45]
+  E: | Zero +64.84 [+60.74, +68.93]
+Seat-by-seat mean score and win rate:
+  VL               s0 99.5 (97%), s1 98.9 (98%), s2 99.3 (98%), s3 99.6 (98%), s4 99.4 (97%)
+
+3. vs Over 5p  Adaptive
+421.4s, 200 seeds, 5000 games
+Bot                                mean score   win rate
+Adaptive          136.77 [ 134.46,  139.09]     100.0%
+Over               10.37 [   9.56,   11.18]       0.0%
+Paired mean score minus the others (positive favors Adaptive):
+  vs Over             +126.40  [+123.69, +129.11]  CI above 0
+Mean score by chart (seed-level 95% CI of the focus shown below):
+chart         Adaptive          Over
+A               140.08         10.27
+B               126.92         10.35
+C               106.90          9.01
+D               165.74         10.58
+E               144.23         11.65
+Paired chart gaps for Adaptive:
+  A: | Over +129.82 [+126.24, +133.40]
+  B: | Over +116.57 [+113.47, +119.67]
+  C: | Over +97.89 [+94.45, +101.33]
+  D: | Over +155.16 [+151.83, +158.49]
+  E: | Over +132.58 [+128.10, +137.06]
+Seat-by-seat mean score and win rate:
+  Adaptive         s0 136.5 (100%), s1 136.8 (100%), s2 137.4 (100%), s3 136.6 (100%), s4 136.6 (100%)
+
+3. vs Over 5p  VL
+383.0s, 200 seeds, 5000 games
+Bot                                mean score   win rate
+VL                134.85 [ 132.64,  137.07]     100.0%
+Over               10.39 [   9.56,   11.22]       0.1%
+Paired mean score minus the others (positive favors VL):
+  vs Over             +124.46  [+121.82, +127.10]  CI above 0
+Mean score by chart (seed-level 95% CI of the focus shown below):
+chart               VL          Over
+A               138.70         10.16
+B               126.08         10.13
+C               108.34          8.24
+D               162.62         10.96
+E               138.52         12.46
+Paired chart gaps for VL:
+  A: | Over +128.55 [+125.17, +131.93]
+  B: | Over +115.94 [+112.57, +119.32]
+  C: | Over +100.10 [+96.89, +103.31]
+  D: | Over +151.66 [+148.12, +155.19]
+  E: | Over +126.06 [+121.36, +130.75]
+Seat-by-seat mean score and win rate:
+  VL               s0 135.3 (100%), s1 134.4 (100%), s2 135.2 (100%), s3 134.6 (100%), s4 134.7 (100%)
+
+3. vs Random 5p  Adaptive
+376.7s, 200 seeds, 5000 games
+Bot                                mean score   win rate
+Adaptive          103.59 [ 101.64,  105.54]      98.5%
+Random             18.18 [  17.40,   18.95]       1.6%
+Paired mean score minus the others (positive favors Adaptive):
+  vs Random            +85.41  [ +83.15,  +87.67]  CI above 0
+Mean score by chart (seed-level 95% CI of the focus shown below):
+chart         Adaptive        Random
+A               106.02         18.35
+B                99.62         16.80
+C                88.03         13.38
+D               114.87         22.35
+E               109.41         20.01
+Paired chart gaps for Adaptive:
+  A: | Random +87.68 [+84.59, +90.76]
+  B: | Random +82.82 [+80.18, +85.46]
+  C: | Random +74.65 [+71.85, +77.45]
+  D: | Random +92.52 [+89.85, +95.20]
+  E: | Random +89.40 [+85.84, +92.96]
+Seat-by-seat mean score and win rate:
+  Adaptive         s0 103.0 (99%), s1 103.7 (98%), s2 104.4 (99%), s3 103.4 (98%), s4 103.4 (99%)
+
+3. vs Random 5p  VL
+341.8s, 200 seeds, 5000 games
+Bot                                mean score   win rate
+VL                 83.22 [  81.80,   84.64]      89.4%
+Random             22.01 [  21.19,   22.82]      11.2%
+Paired mean score minus the others (positive favors VL):
+  vs Random            +61.21  [ +59.42,  +63.00]  CI above 0
+Mean score by chart (seed-level 95% CI of the focus shown below):
+chart               VL        Random
+A                85.36         22.24
+B                81.12         20.18
+C                78.87         14.50
+D                85.93         28.35
+E                84.81         24.76
+Paired chart gaps for VL:
+  A: | Random +63.12 [+60.49, +65.75]
+  B: | Random +60.94 [+58.62, +63.25]
+  C: | Random +64.37 [+62.08, +66.67]
+  D: | Random +57.58 [+55.04, +60.12]
+  E: | Random +60.05 [+57.42, +62.68]
+Seat-by-seat mean score and win rate:
+  VL               s0 83.1 (89%), s1 82.5 (89%), s2 84.9 (90%), s3 82.9 (91%), s4 82.7 (89%)
+
+3. vs Mission 5p  Adaptive
+354.7s, 200 seeds, 5000 games
+Bot                                mean score   win rate
+Adaptive          159.23 [ 156.72,  161.74]      99.9%
+Mission            23.84 [  23.30,   24.39]       0.1%
+Paired mean score minus the others (positive favors Adaptive):
+  vs Mission          +135.39  [+132.60, +138.17]  CI above 0
+Mean score by chart (seed-level 95% CI of the focus shown below):
+chart         Adaptive       Mission
+A               147.47         25.57
+B               170.25         21.37
+C               123.96         23.41
+D               200.13         22.49
+E               154.34         26.38
+Paired chart gaps for Adaptive:
+  A: | Mission +121.90 [+117.98, +125.81]
+  B: | Mission +148.88 [+145.73, +152.04]
+  C: | Mission +100.55 [+97.69, +103.41]
+  D: | Mission +177.63 [+173.93, +181.34]
+  E: | Mission +127.97 [+122.18, +133.76]
+Seat-by-seat mean score and win rate:
+  Adaptive         s0 158.7 (100%), s1 159.5 (100%), s2 159.5 (100%), s3 159.5 (100%), s4 159.0 (100%)
+
+3. vs Mission 5p  VL
+335.3s, 200 seeds, 5000 games
+Bot                                mean score   win rate
+VL                 92.96 [  90.99,   94.94]      96.0%
+Mission            34.78 [  34.16,   35.40]       4.2%
+Paired mean score minus the others (positive favors VL):
+  vs Mission           +58.18  [ +55.97,  +60.39]  CI above 0
+Mean score by chart (seed-level 95% CI of the focus shown below):
+chart               VL       Mission
+A                95.48         34.74
+B                87.69         33.62
+C                91.30         28.50
+D                93.96         40.26
+E                96.38         36.78
+Paired chart gaps for VL:
+  A: | Mission +60.74 [+57.71, +63.78]
+  B: | Mission +54.08 [+51.80, +56.35]
+  C: | Mission +62.79 [+60.22, +65.37]
+  D: | Mission +53.70 [+50.82, +56.58]
+  E: | Mission +59.60 [+55.51, +63.69]
+Seat-by-seat mean score and win rate:
+  VL               s0 93.1 (96%), s1 92.8 (96%), s2 93.0 (96%), s3 92.9 (96%), s4 93.0 (96%)
+
+3. Paired Adaptive − VL vs Zero 3p
+  vs VL                +61.62  [ +60.33,  +62.90]  CI above 0
+  A: +53.75 [+51.80, +55.70]
+  B: +69.66 [+67.96, +71.36]
+  C: +31.45 [+30.10, +32.79]
+  D: +93.09 [+90.97, +95.22]
+  E: +60.13 [+57.85, +62.42]
+
+3. Paired Adaptive − VL vs Over 3p
+  vs VL                 -1.38  [  -1.90,   -0.86]  CI below 0
+  A: -1.36 [-2.00, -0.72]
+  B: -1.09 [-1.93, -0.25]
+  C: -0.78 [-1.48, -0.08]
+  D: -2.40 [-3.75, -1.06]
+  E: -1.26 [-2.00, -0.51]
+
+3. Paired Adaptive − VL vs Random 3p
+  vs VL                 +0.68  [  -0.49,   +1.85]  CI includes 0
+  A: -0.12 [-2.63, +2.39]
+  B: -0.75 [-3.25, +1.75]
+  C: -2.03 [-3.89, -0.17]
+  D: +3.39 [+0.35, +6.42]
+  E: +2.92 [+0.25, +5.59]
+
+3. Paired Adaptive − VL vs Mission 3p
+  vs VL                +55.37  [ +53.37,  +57.37]  CI above 0
+  A: +48.01 [+45.59, +50.43]
+  B: +62.72 [+60.24, +65.20]
+  C: +27.02 [+25.20, +28.83]
+  D: +85.29 [+82.11, +88.47]
+  E: +53.81 [+50.98, +56.64]
+
+3. Paired Adaptive − VL vs Zero 4p
+  vs VL                +58.65  [ +56.99,  +60.31]  CI above 0
+  A: +49.82 [+47.32, +52.33]
+  B: +66.73 [+64.78, +68.69]
+  C: +33.98 [+32.17, +35.80]
+  D: +88.38 [+85.80, +90.96]
+  E: +54.33 [+51.34, +57.32]
+
+3. Paired Adaptive − VL vs Over 4p
+  vs VL                 -0.85  [  -1.44,   -0.26]  CI below 0
+  A: -0.58 [-1.92, +0.76]
+  B: -1.53 [-2.22, -0.85]
+  C: -1.55 [-2.29, -0.82]
+  D: -0.88 [-2.04, +0.28]
+  E: +0.31 [-0.90, +1.52]
+
+3. Paired Adaptive − VL vs Random 4p
+  vs VL                 +9.81  [  +8.56,  +11.05]  CI above 0
+  A: +11.03 [+8.38, +13.68]
+  B: +4.92 [+3.12, +6.73]
+  C: +3.15 [+1.03, +5.27]
+  D: +15.84 [+13.41, +18.28]
+  E: +14.09 [+11.21, +16.97]
+
+3. Paired Adaptive − VL vs Mission 4p
+  vs VL                +57.59  [ +55.65,  +59.54]  CI above 0
+  A: +50.63 [+47.92, +53.34]
+  B: +63.62 [+61.37, +65.87]
+  C: +33.08 [+30.88, +35.27]
+  D: +86.15 [+83.22, +89.08]
+  E: +54.50 [+51.38, +57.61]
+
+3. Paired Adaptive − VL vs Zero 5p
+  vs VL                +65.32  [ +63.22,  +67.43]  CI above 0
+  A: +49.51 [+46.68, +52.35]
+  B: +83.57 [+80.74, +86.41]
+  C: +32.85 [+30.83, +34.87]
+  D: +105.86 [+102.17, +109.55]
+  E: +54.83 [+51.43, +58.23]
+
+3. Paired Adaptive − VL vs Over 5p
+  vs VL                 +1.92  [  +0.86,   +2.98]  CI above 0
+  A: +1.38 [-0.33, +3.09]
+  B: +0.84 [-0.62, +2.30]
+  C: -1.44 [-2.52, -0.37]
+  D: +3.12 [+1.52, +4.73]
+  E: +5.70 [+3.34, +8.07]
+
+3. Paired Adaptive − VL vs Random 5p
+  vs VL                +20.37  [ +19.02,  +21.73]  CI above 0
+  A: +20.66 [+18.44, +22.88]
+  B: +18.50 [+16.51, +20.49]
+  C: +9.16 [+7.27, +11.05]
+  D: +28.94 [+26.67, +31.22]
+  E: +24.60 [+22.06, +27.13]
+
+3. Paired Adaptive − VL vs Mission 5p
+  vs VL                +66.27  [ +64.09,  +68.45]  CI above 0
+  A: +51.98 [+49.14, +54.83]
+  B: +82.56 [+79.49, +85.63]
+  C: +32.66 [+30.39, +34.92]
+  D: +106.16 [+102.44, +109.88]
+  E: +57.97 [+54.59, +61.35]
