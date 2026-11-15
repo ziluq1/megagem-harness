@@ -27,9 +27,12 @@ distribution is that same shrinkage applied to the histogram of past
 bid/value ratios, transferred onto the current lot and hard-capped at the
 opponent's coins (plus this loan's proceeds). Until any evidence arrives the
 distribution is exactly the base bot's Laplace-uniform mixture, so those
-bids match it when tiebreaks are deterministic. P(win | b) multiplies one
-factor per opponent. A factor is P(bid below) plus P(tie) times this seat's
-tiebreak. The harness gives the seat after the previous winner the best
+bids match it when tiebreaks are deterministic. Once a rival's shrunk rate of
+bidding 0 clears 0.45 (and at least six auctions have been seen), a point
+mass at 0 is mixed in, capped at 0.85. That is ``USE_ZERO_POINT``.
+P(win | b) multiplies one factor per opponent. A factor is P(bid below)
+plus P(tie) times this seat's tiebreak. The harness gives the seat after
+the previous winner the best
 priority and leaves the previous winner last; the opening auction draws
 uniformly among the tied seats, and that coin flip is priced exactly. A table
 whose treasure ratio has settled below the prior is treated as passive and
@@ -42,11 +45,12 @@ Layer 2 (``use_portfolio``). Four parameter presets — conservative, balanced,
 aggressive, mission — are scored by score margin (our score minus the mean of
 the others). ``on_game_start`` picks one with UCB1. The first game, and every
 game in which no previous result was checkpointed, uses the balanced preset,
-which is ValueLiquidityBot's lambda, delta, and denial weight. Preset
-statistics are about those presets only. They are not keyed by seat, because
-a later game may sit different people in the same chairs. Old results are
-decayed so a changed field can pull the choice back. If the process is fresh
-every game, ``games_completed`` stays 0 and this layer does not change a bid.
+which is ValueLiquidityBot's lambda, delta, and denial weight. The constant
+is off. On seeds 0–39 a bot that kept its memory across a six-deal match
+scored about five points less than the balanced preset, because UCB1 spent
+the match trying the other three arms. A 0.75-point hysteresis did not stop
+that. A 24-deal match was a wash. The selector stays in the file so a later
+trial can turn it back on; ``AdaptiveLayer12Bot`` still has it on.
 
 Layer 3 (``use_jitter``). When several legal bids sit within a small utility
 band of the best, one of them is drawn with ``random`` (the worker stream
@@ -110,6 +114,22 @@ JITTER_EPSILON = 0.25
 PRESET_DECAY = 0.96
 # Ignore ratios on lots with almost no value signal; they explode.
 MIN_VALUE = 1.0
+
+# Feature switches. Each one is off until a paired trial keeps it.
+# Point mass at 0 once a rival's shrunk zero-rate clears the threshold.
+# On for the shipped bot: seeds 40–199, it raised the score against a
+# zero-bidder and against SmallBidBot, and it did not move the score
+# against ValueLiquidityBot.
+USE_ZERO_POINT = True
+ZERO_POINT_MIN = 0.45
+# Laplace around the shrunk bid/value mean, width from residual spread.
+USE_RESIDUAL_SPREAD = False
+# Keep the current preset unless a challenger's mean margin clears this.
+USE_PRESET_HOLD = False
+PRESET_HOLD_MARGIN = 0.75
+# Late auctions: the learned histogram was less accurate than the prior.
+USE_LATE_PRIOR = False
+LATE_PRIOR_GEMS = 8
 
 
 def shrink(observed: float, prior: float, n: int, k: float = SHRINK_K) -> float:
@@ -503,15 +523,16 @@ def _prior_ratio(kind: str, bid_fraction: float) -> float:
 
 
 class AdaptiveBot(ValueLiquidityBot):
-    """ValueLiquidityBot plus an opponent model and a preset portfolio.
+    """ValueLiquidityBot plus an in-game opponent model.
 
-    ``use_jitter`` is the third layer. It defaults to off after the paired
-    evaluation; ``AdaptiveLayer13Bot`` turns it back on. Turning all three
-    off is the base utility with ValueLiquidityBot's published parameters.
+    The preset portfolio and the bid jitter are still in the file and default
+    to off. ``AdaptiveLayer12Bot`` turns the portfolio on. ``AdaptiveLayer13Bot``
+    turns jitter on. Turning the model off as well is the base utility with
+    ValueLiquidityBot's published parameters.
     """
 
     use_opponent_model = True
-    use_portfolio = True
+    use_portfolio = False
     use_jitter = False
     shrink_k = SHRINK_K
     jitter_epsilon = JITTER_EPSILON
@@ -520,6 +541,8 @@ class AdaptiveBot(ValueLiquidityBot):
     def __init__(self) -> None:
         super().__init__()
         self.games_completed = 0
+        self.fallback_bids = 0
+        self.illegal_bids = 0
         self.preset_index = BALANCED_PRESET
         self.preset_counts = [0.0] * len(PRESETS)
         self.preset_totals = [0.0] * len(PRESETS)
@@ -549,12 +572,34 @@ class AdaptiveBot(ValueLiquidityBot):
             if (not self.use_portfolio) or self.games_completed <= 0:
                 self.preset_index = BALANCED_PRESET
             else:
-                self.preset_index = ucb1_index(
+                proposed = ucb1_index(
                     self.preset_counts,
                     self.preset_totals,
                     balanced=BALANCED_PRESET,
                     visits=self.preset_visits,
                 )
+                if USE_PRESET_HOLD and proposed != self.preset_index:
+                    current = self.preset_index
+                    current_n = self.preset_counts[current]
+                    proposed_n = self.preset_counts[proposed]
+                    current_mean = (
+                        self.preset_totals[current] / current_n
+                        if current_n > 1e-9
+                        else 0.0
+                    )
+                    proposed_mean = (
+                        self.preset_totals[proposed] / proposed_n
+                        if proposed_n > 1e-9
+                        else 0.0
+                    )
+                    # A first visit of each arm still happens inside UCB1.
+                    # After that, switch only when the challenger's realized
+                    # margin beats the preset we are already playing.
+                    if proposed_n > 1e-9 and (
+                        proposed_mean < current_mean + PRESET_HOLD_MARGIN
+                    ):
+                        proposed = current
+                self.preset_index = proposed
             self._apply_preset(PRESETS[self.preset_index])
         except Exception:
             self.preset_index = BALANCED_PRESET
@@ -598,12 +643,12 @@ class AdaptiveBot(ValueLiquidityBot):
                 self._remember_round(info, context, {})
                 return 0
             bid = self._choose_bid(info, context, deadline)
-            if bid < 0:
-                return 0
-            if bid > context.limit:
-                return context.limit
+            if bid < 0 or bid > context.limit:
+                self.illegal_bids += 1
+                return max(0, min(context.limit, bid))
             return bid
         except Exception:
+            self.fallback_bids += 1
             self.round_cache = None
             try:
                 return select_bid(
@@ -797,6 +842,8 @@ class AdaptiveBot(ValueLiquidityBot):
         )
         if not self.use_opponent_model:
             return prior, _mean_of(prior)
+        if USE_LATE_PRIOR and info.gems_remaining <= LATE_PRIOR_GEMS:
+            return prior, _mean_of(prior)
         track = self.opponents.get(opponent.id)
         usable: list[float] = []
         if track is not None and context.value >= MIN_VALUE:
@@ -814,7 +861,31 @@ class AdaptiveBot(ValueLiquidityBot):
                     usable.append(bid / value * context.value)
         if not usable:
             return prior, _mean_of(prior)
-        learned = _histogram(usable, budget)
+        if USE_RESIDUAL_SPREAD and track is not None:
+            center_ratio = self.ratio_estimate(opponent.id, context.kind)
+            center = min(float(budget), max(0.0, center_ratio * context.value))
+            signed = [
+                float(bid) - predicted
+                for bid, value, _coins, _kind, _round, predicted in (
+                    track.kind_observations(context.kind)
+                )
+                if value >= MIN_VALUE
+            ]
+            if signed:
+                ordered = sorted(abs(item) for item in signed)
+                mid = len(ordered) // 2
+                if len(ordered) % 2:
+                    mad = ordered[mid]
+                else:
+                    mad = 0.5 * (ordered[mid - 1] + ordered[mid])
+            else:
+                mad = self.bid_scale
+            width = shrink(mad, self.bid_scale, len(signed), self.shrink_k)
+            learned = _bid_distribution(
+                budget, center, max(width, 0.5), self.laplace_weight
+            )
+        else:
+            learned = _histogram(usable, budget)
         weight = len(usable) / (len(usable) + self.shrink_k)
         mixed = _blend(prior, learned, weight)
         raw_allin = 0.0
@@ -829,6 +900,11 @@ class AdaptiveBot(ValueLiquidityBot):
             pall = shrink(raw_allin, ALLIN_PRIOR, len(track.allin_flags), self.shrink_k)
             if pall > 0.12:
                 mixed = _impose_point(mixed, allin_at, pall)
+        enough = track is not None and len(track.zero_flags) >= MIN_CLASSIFY_OBS
+        if USE_ZERO_POINT and enough:
+            p_zero = self.zero_probability(opponent.id)
+            if p_zero >= ZERO_POINT_MIN:
+                mixed = _impose_point(mixed, 0, min(0.85, p_zero))
         return mixed, _mean_of(mixed)
 
     def _table_stance(self, info: BotInfo) -> str:

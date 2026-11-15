@@ -389,13 +389,50 @@ class JitterTests(unittest.TestCase):
         self.assertEqual(first, second)
 
 
+class ZeroPointTests(unittest.TestCase):
+    def test_zero_point_can_be_turned_off(self):
+        import bot_definitions.adaptive_bot as mod
+
+        bot = AdaptiveBot()
+        bot.on_game_start()
+        _feed_ratio(bot, 0.0, 8)
+        info = _training_info()
+        context = bot._lot_context(info)
+        self.assertIsNotNone(context)
+        assert context is not None
+        opponent = info.other_players[0]
+        saved = mod.USE_ZERO_POINT
+        try:
+            mod.USE_ZERO_POINT = True
+            on, _mean = bot._distribution(info, opponent, context)
+            mod.USE_ZERO_POINT = False
+            off, _mean = bot._distribution(info, opponent, context)
+        finally:
+            mod.USE_ZERO_POINT = saved
+        # The imposed mass is the shrunk zero-rate, not "more than the
+        # histogram." A pure zero-bidder's histogram can already sit higher.
+        self.assertNotEqual(on[0], off[0])
+        self.assertGreaterEqual(min(on), 0.0)
+        self.assertAlmostEqual(sum(on), 1.0, places=6)
+        self.assertAlmostEqual(sum(off), 1.0, places=6)
+        mod.USE_ZERO_POINT = False
+        again, _mean = bot._distribution(info, opponent, context)
+        self.assertEqual(again, off)
+
+
 class AblationAndMemoryTests(unittest.TestCase):
     def test_each_layer_constant_can_turn_that_layer_off(self):
         self.assertTrue(AdaptiveBot.use_opponent_model)
-        self.assertTrue(AdaptiveBot.use_portfolio)
-        # Jitter stayed in the code and is off: the 1000–1199 eval did not
-        # show a gain over the opponent model plus the portfolio.
+        # Portfolio exploration lost about five points on six-deal matches
+        # (seeds 0–39). The selector remains on AdaptiveLayer12Bot.
+        self.assertFalse(AdaptiveBot.use_portfolio)
         self.assertFalse(AdaptiveBot.use_jitter)
+        bot = AdaptiveBot()
+        bot.games_completed = 6
+        bot.preset_counts = [4.0, 0.0, 4.0, 4.0]
+        bot.preset_totals = [40.0, 0.0, 80.0, 40.0]
+        bot.on_game_start()
+        self.assertEqual(bot.preset_index, BALANCED_PRESET)
         self.assertTrue(AdaptiveLayer13Bot.use_jitter)
         self.assertFalse(AdaptiveAllOffBot.use_opponent_model)
         self.assertFalse(AdaptiveAllOffBot.use_portfolio)
