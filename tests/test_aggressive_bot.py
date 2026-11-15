@@ -6,6 +6,7 @@ import unittest
 from random import Random
 
 from bot_definitions.aggressive_bot import (
+    LAM_TREASURE,
     USE_ENDGAME,
     USE_LIQUIDITY,
     USE_MISSIONS,
@@ -279,10 +280,14 @@ class RevealEndgameAndSwitchTests(unittest.TestCase):
         self.assertFalse(AggressiveNoLiquidity().use_liquidity)
         self.assertFalse(AggressiveNoReveal().use_reveal)
         self.assertFalse(AggressiveNoEndgame().use_endgame)
-        # The held-out eval turned every idea off. Subclasses can turn one on.
-        self.assertFalse(USE_MISSIONS or USE_LIQUIDITY or USE_REVEAL or USE_ENDGAME)
-        self.assertTrue(AggressiveNoMissions().use_liquidity)
+        # Missions and the late margin are on. Reveal and the cover cap are off.
+        self.assertTrue(USE_MISSIONS and USE_ENDGAME)
+        self.assertFalse(USE_LIQUIDITY or USE_REVEAL)
+        self.assertEqual(LAM_TREASURE, 0.5)
         import bot_definitions.aggressive_bot as module
+
+        self.assertTrue(module.USE_CHART_LAMBDA)
+        self.assertTrue(AggressiveNoMissions().use_liquidity)
 
         original = module.USE_MISSIONS
         try:

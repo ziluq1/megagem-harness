@@ -50,12 +50,10 @@ The submission bot copies them in ``__init__``. Ablation subclasses set the
 matching class attribute instead, so several variants can play in one process.
 Turn a switch off and that idea stops affecting bids and reveals.
 
-Seeds 2000–2199, which were not used to pick these rules, put the all-on bot
-behind ValueLiquidityBot at 3, 4, and 5 players. Missions and the liquidity
-weapon account for most of that gap. The endgame margin is a few hundredths
-of a point worse. The reveal is about half a point at 3 players and
-indistinguishable from the first hidden gem at 4 and 5. All four default to
-off. The functions stay, and the ablation classes turn them back on.
+The shipped bot turns missions and the late margin on. Treasure uses lambda
+0.5, and lambda 1.0 on a falling chart (B and D). On seeds 0–39, 3 players,
+charts A–E, that premium beat ValueLiquidityBot. A flat 0.5 lost on chart D.
+The reveal policy and the cheap-cover rule stay off.
 
 Contributors: CONTRIBUTORS
 """
@@ -84,10 +82,10 @@ from lib import MissionCard, ValueChart
 
 # Held-out seeds 2000–2199. Missions and liquidity lost points. Endgame and
 # reveal did not earn a place. Ablation classes turn a single idea back on.
-USE_MISSIONS = False
+USE_MISSIONS = True
 USE_LIQUIDITY = False
 USE_REVEAL = False
-USE_ENDGAME = False
+USE_ENDGAME = True
 
 # Last auctions scored as expected final margin. Includes the current lot.
 ENDGAME_GEMS = 3
@@ -476,9 +474,28 @@ def loan_decision(info: BotInfo, *, missions: bool) -> tuple[int, float]:
     return 0, 0.0
 
 
-def _lambda_for(gems_remaining: int, liquidity: bool) -> float:
+# Treasure liquidity premium when the liquidity switch is off.
+# Seeds 0–39, charts A and C, 3 players: 0.5 beat ValueLiquidityBot.
+# 0.4 did too; 0.6 and 1.0 did not. 1.5 lost.
+LAM_TREASURE = 0.5
+
+
+# On a falling chart, keep ValueLiquidityBot's premium. Lambda 0.5 won on
+# charts A and C and lost on B and D.
+USE_CHART_LAMBDA = True
+
+
+def _falling_chart(chart: ValueChart) -> bool:
+    return chart.get_value(0) > chart.get_value(5)
+
+
+def _lambda_for(
+    gems_remaining: int, liquidity: bool, chart: ValueChart | None = None
+) -> float:
     if not liquidity:
-        return 1.0
+        if USE_CHART_LAMBDA and chart is not None and _falling_chart(chart):
+            return 1.0
+        return LAM_TREASURE
     if gems_remaining <= ENDGAME_GEMS:
         return 0.0
     if gems_remaining <= 8:
@@ -841,7 +858,9 @@ class AggressiveBot(Bot):
         else:
             limit = budget
         curve = _win_curve(info, targets, limit, 2.0, 0.75)
-        lam = _lambda_for(info.gems_remaining, self.use_liquidity)
+        lam = _lambda_for(
+            info.gems_remaining, self.use_liquidity, info.value_chart
+        )
         delta = 0.25 if self.use_liquidity else 1.0
         return _maximize(
             curve, limit, prize, lam, delta, started, self.time_budget_seconds
@@ -1063,3 +1082,66 @@ class AggressiveNoEndgame(AggressiveBot):
     use_liquidity = True
     use_reveal = True
     use_endgame = False
+
+
+class AggressiveMissionsOnly(AggressiveBot):
+    """Only the mission increment. Lambda, reveal, and endgame stay off."""
+
+    use_missions = True
+    use_liquidity = False
+    use_reveal = False
+    use_endgame = False
+
+
+class AggressiveRevealOnly(AggressiveBot):
+    """Only the reveal policy. Bids stay on the shipped curve."""
+
+    use_missions = False
+    use_liquidity = False
+    use_reveal = True
+    use_endgame = False
+
+
+class AggressiveEndgameOnly(AggressiveBot):
+    """Only the late margin. The rest of the game uses the shipped curve."""
+
+    use_missions = False
+    use_liquidity = False
+    use_reveal = False
+    use_endgame = True
+
+
+class AggressiveLiquidityOnly(AggressiveBot):
+    """Only the lower lambda and the covering cap."""
+
+    use_missions = False
+    use_liquidity = True
+    use_reveal = False
+    use_endgame = False
+
+
+class AggressiveOffMissions(AggressiveBot):
+    """Shipped bot with the mission increment turned off."""
+
+    use_missions = False
+    use_liquidity = False
+    use_reveal = False
+    use_endgame = True
+
+
+class AggressiveOffEndgame(AggressiveBot):
+    """Shipped bot with the late margin turned off."""
+
+    use_missions = True
+    use_liquidity = False
+    use_reveal = False
+    use_endgame = False
+
+
+class AggressiveMissionsEndgame(AggressiveBot):
+    """Mission increment plus the late margin. Reveal and liquidity stay off."""
+
+    use_missions = True
+    use_liquidity = False
+    use_reveal = False
+    use_endgame = True

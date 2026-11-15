@@ -2,11 +2,13 @@ from random import Random
 from itertools import permutations
 from bot_runner import BotRunner
 from harness import play_game
-from custom_bots import ValueLiquidityBot, SmallBidBot
+from bot_definitions.value_liquidity_bot import ValueLiquidityBot
+from bot_definitions.adaptive_bot import AdaptiveBot
+from bot_definitions.aggressive_bot import AggressiveBot
 from bot_definitions.baselines import MyopicEvBot, FractionValueBot
 
 GAMES_PER_SEATING = 20           # raise for tighter results
-TABLE = [ValueLiquidityBot, MyopicEvBot, MyopicEvBot]   # change per table
+TABLE = [AdaptiveBot, MyopicEvBot, MyopicEvBot]
 
 def main():
     totals = {}
