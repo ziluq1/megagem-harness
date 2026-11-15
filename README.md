@@ -197,6 +197,68 @@ The main guard shown above is required for scripts that launch spawned workers.
 Define custom bot classes at module scope inside `src/bot_definitions/` and expose them
 through `src/custom_bots.py`. Avoid defining them inside functions or `__main__`.
 
+## Submitted bot
+
+`ValueLiquidityBot` (`custom_bots:ValueLiquidityBot`) is an analytic sealed-bid
+bidder. It estimates each color's final display count from the public display,
+its own hidden hand, and a hypergeometric draw of opponents' hands out of
+`unknown_gems` (the undealt deck is in that pool and never enters the display).
+Lot value is the chart expectation plus missions the lot would newly complete.
+Charts B, D, and E are not treated as "more gems, more value."
+
+A bid `b` maximizes `P(win | b) * surplus(b)`. Treasure surplus charges
+`(1 + λ)` per coin and a shade `δ` on positive bids. Investments return the bid
+at the end, so only `λ` is charged, and one coin is held back while treasures
+remain. Loans are taken when the extra coins are cheap relative to `λ`; the
+principal itself nets to zero. In the last two gems, `λ` and `δ` go to zero.
+
+Tuned parameters, from a 16-point grid on paired seeds and a confirmation run:
+
+| Parameter | Value | Role |
+|---|---|---|
+| `lam` | 1.0 | Liquidity premium per coin spent or locked |
+| `delta` | 1.0 | Shade on gem value for any positive bid |
+| `bid_fraction` | 0.55 | Rival mean bid as a fraction of the public value signal |
+| `bid_scale` | 2.0 | Laplace scale of that bid distribution, in coins |
+| `laplace_weight` | 0.8 | Rest of the mixture is a uniform hedge |
+| `denial_weight` | 0.4 | Share of a rival-only mission counted as denial value |
+
+`λ = 0.25` lost to a "bid half of fair value" baseline. `λ = 1.0`, `δ = 1.0`
+was the best cell in the grid and, on the same 36 seeds, beat `λ = 0.5`, `δ = 2`
+against both that baseline and a myopic expected-value bot. Environment variables
+`MEGAGEM_VL_LAM`, `MEGAGEM_VL_DELTA`, `MEGAGEM_VL_FRACTION`, and `MEGAGEM_VL_DENIAL`
+override the submission class for local sweeps only.
+
+On 36 paired seeds, seats rotated, charts A–E:
+
+- Against MyopicEV and FractionValue in the same three-player games (108 games),
+  mean score was 104.4 [94.2, 114.7] and the high score was ours in 85.2% of
+  games. Paired gaps: +54.0 vs MyopicEV [+42.8, +65.1], +35.1 vs FractionValue
+  [+25.5, +44.7].
+- Against SmallBid and a zero-bid seat (108 games), mean score was 128.9
+  [121.0, 136.9], the high score was ours in 84.3% of games, and the paired gap
+  vs SmallBid was +47.7 [+33.9, +61.4].
+
+The same parameters lead 4-player and 5-player mixed tables (16 and 12 seeds).
+The intervals above are across seeds, after averaging seat rotations of a deal.
+
+Known weaknesses: rival bids are a fixed mixture, not learned, so a table of
+very cheap bidders can still collect gems this bot shades away from — chart D
+in five-player games is the clearest case. The premium is a constant, not a
+solved continuation value. Denial uses the largest rival mission, not the
+chance that rival would have won the auction. Opening ties are random and are
+treated as losses, so the bot sometimes pays one extra coin rather than flip.
+
+`src/bot_definitions/baselines.py` holds the myopic and fraction opponents used
+above. They are not exported from `custom_bots.py`. Reproduce with:
+
+```sh
+python3 experiments/bench_bots.py --seeds 36
+python3 experiments/bench_bots.py --seeds 16 --players 4
+python3 experiments/bench_bots.py --seeds 12 --players 5
+python3 experiments/bench_bots.py --seeds 10 --sweep
+```
+
 ## Experiment examples
 
 The `experiments/` directory contains script and notebook examples that reuse bot runners across
@@ -225,7 +287,9 @@ experiment finishes, including when an exception interrupts it.
 - `src/immutable.py`: a pickleable read-only mapping used by cards and snapshots.
 - `src/harness.py`: setup, round resolution, scoring, and CLI.
 - `src/bot_definitions/`: custom bot implementations, including `SmallBidBot` in
-  `small_bid_bot.py`.
+  `small_bid_bot.py` and `ValueLiquidityBot` in `value_liquidity_bot.py`.
+  Shared pricing helpers live in `pricing.py`. `baselines.py` is for local
+  comparisons only.
 - `src/custom_bots.py`: imports and exposes the bot classes available to the CLI.
 
 Tests require no third-party packages. Ruff and mypy are optional development tools:
