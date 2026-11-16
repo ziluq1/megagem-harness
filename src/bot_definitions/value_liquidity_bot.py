@@ -1,72 +1,24 @@
-"""ValueLiquidityBot: robust analytic bidder for Megagem.
+"""ValueLiquidityBot: sealed-bid surplus with a fixed coin shadow price.
 
-Strategy
---------
-Price each treasure from the active value chart and the missions it completes,
-then bid as a sealed-bid auction rather than paying that price outright.
+A bid maximizes ``P(win | b)`` times surplus. Surplus is the chart value of
+the lot, plus missions it completes, plus a capped mission-progress credit,
+minus a one-coin shade on any positive bid, minus ``(1 + lambda)`` times the
+bid. ``lambda`` is 1.0 and ``delta`` is 1.0. Rival bids are a Laplace-uniform
+mixture: mean 0.55 of a public value signal, scale 2, weight 0.8, and denial
+weight 0.4. A lot that only advances a mission adds at most 1 coin, at 0.35
+of the reward times the share of the requirement it fills. After 4 rival
+bids, if 70% were 1 coin or less, that progress credit turns off. The reveal
+is strategic. It does not change the final display.
 
-The final display count of a color is the gems already showing plus every
-hidden starting-hand gem of that color. Our own hand is known. Opponents'
-hands are a hypergeometric draw from ``unknown_gems``; the undealt deck is in
-that pool but never enters the display. Charts B and D pay for scarcity, and
-chart E peaks and then falls, so a higher count is not treated as better.
-The final display itself is fixed once the hands are dealt: auction wins never
-enter it, and the end-of-game reveal dumps every remaining starting gem.
+The rival mixture is not learned, so a table of very cheap bidders can still
+take gems this bot shades away from. Opening ties are priced as losses.
+Phase lambda, covering, the loan plan, and the invest discount stay off.
+Tuned bidding runs only when ``type(self) is ValueLiquidityBot``.
 
-A legal bid ``b`` is scored as
-
-    P(win | b) * ((gem value + missions + denial - hurdle) - (1 + lambda) * b)
-
-``lambda`` is a shadow price on coins that are spent or locked. Paying it is
-what stops the bot from buying every positive-gem auction and then taking bad
-loans. The hurdle (``delta``) shades positive bids; a bid of zero ignores it,
-so a free gem is still taken. In the last couple of gems both terms go to
-zero and leftover cash is spent at face value. Phase and player-count
-multipliers below scale that same lambda. They start at 1, so the published
-shadow price is unchanged until a measured trial moves them.
-
-Investments return the bid at the end and add a fixed bonus, so the bid is
-not a score cost — only locked liquidity. One coin is held back while treasures
-remain. Loans are taken only when the liquidity-adjusted option value of the
-extra coins is positive. ``USE_LOAN_PLAN`` replaces that shortcut with an
-explicit plan over the exposed gems and the next few draws: principal is
-repaid at the end, so a loan is worth the extra gems it buys, minus the bid.
-
-Opponent bids are a Laplace-uniform mixture around a fraction of a public
-value signal, capped by coins and by that signal. Tie priority matches the
-harness: the seat after the previous winner wins ties, and the winner is last
-in the next auction. The first auction breaks ties at random, so this bot does
-not rely on winning them. ``USE_COVERING`` bids the minimum price that beats
-every rival budget (their max, or one more when we lose the tie) when that
-price is still below the lot's value. That switch stays off: unrestricted
-covering lost points, and a tight cap was not needed once mission bids were
-capped on their own.
-
-A lot that advances a mission without finishing it is worth
-``MISSION_PROGRESS_WEIGHT`` (0.35) times the reward times the share of the
-requirement the lot supplies. A mission the lot completes is left to the
-completion bonus, so each mission is counted once. The credit may raise the
-bid by at most ``MISSION_BID_CAP`` coins (1). After ``QUIET_MIN_OBS`` rival
-bids, if at least ``QUIET_RATE`` of them were ``QUIET_BID`` or less, the table
-is treated as passive and the progress credit turns off. Both switches are on:
-on held-out seeds the frozen-table paired gain was about three points, and the
-gate removed most of the loss against bidders who only offer one coin.
-
-The reveal does not change the final display. It is chosen to deflate colors
-still on the block and to avoid inflating them. ``REVEAL_MODE`` stays
-``strategic``; revealing the first gem or a uniform draw both scored worse.
-
-Tuned behavior runs only when ``type(self) is ValueLiquidityBot``. AdaptiveBot
-and MyopicEvBot keep the pricing they already had: AdaptiveBot replaces
-``get_bid``, and MyopicEvBot inherits the untuned branch.
-
-Every switch is a module constant. Turn it off and that idea drops out.
-
-Contributors: CONTRIBUTORS
+Contributors: @ziluq1
 """
 
 import math
-import os
 import random
 import time
 from collections.abc import Mapping, Sequence
@@ -92,14 +44,6 @@ from bot_definitions.pricing import (
 from bots import Bot, BotInfo, GameSummary, RoundResult
 from constants import STANDARD_GEMS, AuctionType, GemType, WildCardRequirement
 from lib import MissionCard
-
-
-def _env_float(name: str, default: float) -> float:
-    """Optional experiment override. Unset during tournament play."""
-    raw = os.environ.get(name)
-    if raw is None or raw == "":
-        return default
-    return float(raw)
 
 
 # --- feature switches -------------------------------------------------------
@@ -651,16 +595,12 @@ class ValueLiquidityBot(Bot):
         self.bid_scale = type(self).bid_scale
         self.laplace_weight = type(self).laplace_weight
         self.denial_weight = type(self).denial_weight
-        # Sweeps override the submission class only, not baselines that subclass it.
         # Quiet counts are instance state only here, so subclass checkpoints stay
-        # the dictionaries they had before this feature.
+        # the dictionaries they had before this feature. Parameters stay on the
+        # class: the host environment cannot change them.
         if type(self) is ValueLiquidityBot:
             self.quiet_low = 0
             self.quiet_seen = 0
-            self.lam = _env_float("MEGAGEM_VL_LAM", self.lam)
-            self.delta = _env_float("MEGAGEM_VL_DELTA", self.delta)
-            self.bid_fraction = _env_float("MEGAGEM_VL_FRACTION", self.bid_fraction)
-            self.denial_weight = _env_float("MEGAGEM_VL_DENIAL", self.denial_weight)
 
     def on_game_start(self) -> None:
         try:

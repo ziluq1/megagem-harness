@@ -1,66 +1,19 @@
-"""AdaptiveBot: in-game opponent model on top of ValueLiquidityBot.
+"""AdaptiveBot: ValueLiquidityBot's surplus with a learned rival bid curve.
 
-Strategy
---------
-The bid still maximises the base bot's liquidity-adjusted surplus
+``P(win | b)`` comes from each opponent's recent bids, shrunk toward the base
+prior (``k = 8``) and capped at 24 observations. Until evidence arrives the
+distribution matches the base Laplace-uniform mixture. Once a rival's shrunk
+rate of bidding 0 is at least 0.45 after 6 auctions, a point mass at 0 is
+mixed in, capped at 0.85. The shipped bot uses the balanced preset
+(lambda 1.0, delta 1.0, denial weight 0.4). Portfolio search and bid jitter
+are off, so a fresh bot does not explore presets and does not call ``random``.
 
-    P(win | b) * ((gem value + missions + denial - hurdle) - (1 + lambda) * b)
+``get_bid`` replaces the base bot, so the mission-progress credit and the
+quiet-table gate do not run. On held-out seeds 2000–2099 the same-table gap
+versus ValueLiquidityBot was not significant, and this bot trailed on charts
+B and C and at 3 players.
 
-with the same investment and loan accounting as ``select_bid`` in
-``pricing.py``. What changes is where P(win | b) and the parameters come from.
-Three layers sit on that utility. Each is a class constant so it can be
-ablated without editing the rest of the bot.
-
-Layer 1 (``use_opponent_model``), the important one. ``get_bid`` caches this
-lot's value signal, each opponent's coins, and the mean bid the model is about
-to assume. ``on_round_end`` stores, per opponent, the validated bid, that
-cached value, their coins at bid time, the auction type, and the round.
-From that log the bot keeps a bid/value ratio (median, or a trimmed mean once
-five observations exist), the rate of bidding 0, the rate of bidding their
-whole coin stack, and the residuals around the mean that was predicted at the
-time. Every estimate is shrunk toward ValueLiquidityBot's prior:
-
-    (n * observed + k * prior) / (n + k)
-
-with ``k = 8``, so two or three rounds barely move the prior. The predictive
-distribution is that same shrinkage applied to the histogram of past
-bid/value ratios, transferred onto the current lot and hard-capped at the
-opponent's coins (plus this loan's proceeds). Until any evidence arrives the
-distribution is exactly the base bot's Laplace-uniform mixture, so those
-bids match it when tiebreaks are deterministic. Once a rival's shrunk rate of
-bidding 0 clears 0.45 (and at least six auctions have been seen), a point
-mass at 0 is mixed in, capped at 0.85. That is ``USE_ZERO_POINT``.
-P(win | b) multiplies one factor per opponent. A factor is P(bid below)
-plus P(tie) times this seat's tiebreak. The harness gives the seat after
-the previous winner the best
-priority and leaves the previous winner last; the opening auction draws
-uniformly among the tied seats, and that coin flip is priced exactly. A table
-whose treasure ratio has settled below the prior is treated as passive and
-the bid is shaded down toward the cheapest bid that still captures most of
-the win probability. A table that has settled above the prior is treated as
-aggressive: thin lots with no mission are not chased, and lots that complete
-a mission are paid for.
-
-Layer 2 (``use_portfolio``). Four parameter presets — conservative, balanced,
-aggressive, mission — are scored by score margin (our score minus the mean of
-the others). ``on_game_start`` picks one with UCB1. The first game, and every
-game in which no previous result was checkpointed, uses the balanced preset,
-which is ValueLiquidityBot's lambda, delta, and denial weight. The constant
-is off. On seeds 0–39 a bot that kept its memory across a six-deal match
-scored about five points less than the balanced preset, because UCB1 spent
-the match trying the other three arms. A 0.75-point hysteresis did not stop
-that. A 24-deal match was a wash. The selector stays in the file so a later
-trial can turn it back on; ``AdaptiveLayer12Bot`` still has it on.
-
-Layer 3 (``use_jitter``). When several legal bids sit within a small utility
-band of the best, one of them is drawn with ``random`` (the worker stream
-seeded by ``--bot-seed``). A bid that is clearly best is played as itself.
-The draw never leaves the budget and never selects a negative surplus.
-The constant defaults to off: on seeds 1000–1199 the draw did not improve
-on layers 1 and 2, and it gave a little of that gain back against ordinary
-opponents. The code stays so the layer can be switched on for another trial.
-
-Contributors: CONTRIBUTORS
+Contributors: @ziluq1
 """
 
 from __future__ import annotations

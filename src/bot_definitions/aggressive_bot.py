@@ -1,61 +1,18 @@
-"""AggressiveBot: mission races, cheap covers, and an exact late margin.
+"""AggressiveBot: mission races and a late-game margin.
 
-This is a different bidder from ValueLiquidityBot and AdaptiveBot. Those two
-score a bid as own-score surplus times a liquidity premium. This one spends
-to finish missions and to take lots that broke rivals would otherwise keep,
-and it only borrows coins when a visible lot pays for the loan.
+Treasure utility is ``P(win)`` times prize, minus ``delta``, minus
+``(1 + lambda)`` times the bid. ``lambda`` is 0.5, and 1.0 when the chart
+pays more at a display count of 0 than at 5 (charts B and D). Missions are
+priced when a lot finishes one or moves it forward. The last three gems are
+scored as expected final margin. Loans are taken only when a visible lot
+pays for them. The reveal returns index 0, and the cheap-cover rule is off.
 
-Verified harness rules this strategy relies on
-----------------------------------------------
-* Treasure (``AuctionType.AUCTION``) awards ``min(card.value, len(queue))``
-  gems from the front of the exposed queue, then the winner pays the bid.
-  ``harness._apply_auction``.
-* A loan adds ``card.value`` coins and then subtracts the bid. At the end
-  ``AuctionCard.end_game_value`` subtracts the principal, so unspent loan
-  coins score zero. The bid itself is spent. ``lib.AuctionCard``,
-  ``harness._score_player``.
-* An investment locks the bid in ``invested_coins`` (returned at the end) and
-  scores an extra ``card.value`` bonus. The bid is not a score cost. The cost
-  is not being able to spend those coins before the end.
-* Every auction winner may reveal one hidden starting gem, via
-  ``choose_hidden_gem``. The engine does not pick the color. An empty hand
-  reveals nothing and does not call the bot. ``player.reveal_gem``.
-* ``finish_game`` moves every remaining hidden gem into the value display
-  before scoring. The display is exactly the starting hands. Won gems never
-  enter it. A reveal changes when opponents learn a color, not the final
-  chart values. ``harness.finish_game``.
-* The chart price of a color is ``ValueChart.get_value(display_count)``.
-  Charts B and D fall as the count rises. Chart E peaks at three. Scoring
-  multiplies won gems by that price. ``decks.VALUE_CHARTS``,
-  ``pricing.color_expectations``.
-* Four missions are public. After each auction, only the winner is checked.
-  A completed mission is removed, so only one player claims it. Gems are not
-  consumed. ``harness._claim_missions``.
-* Legal bids are ``0 .. coins``, or ``0 .. coins + principal`` on a loan.
-  Anything else is treated as 0. ``player.Player.get_bid``.
-* The high bid wins. The opening tie is a uniform draw. Later, the seat after
-  the previous winner wins the tie, and the winner is last in the next
-  auction. ``harness._select_winner``, ``pricing.tie_win_probability``.
-* Opponents' hidden colors and the deck order are not visible. ``unknown_gems``
-  mixes the two. ``bot_info.build_bot_info``.
+A flat lambda of 0.5 lost on the falling charts; the chart switch is what
+kept those tables. Replacing this bot with ValueLiquidityBot can still score
+higher at 5 players or on chart B, even when this bot outscores the
+ValueLiquidityBot sitting across the same table.
 
-A reveal cannot complete a mission. Missions look at gems won at auction.
-The reveal policy only moves the public display, which is what changes a
-rival's price for colors still to be sold.
-
-Feature switches
-----------------
-``USE_MISSIONS``, ``USE_LIQUIDITY``, ``USE_REVEAL``, and ``USE_ENDGAME``.
-The submission bot copies them in ``__init__``. Ablation subclasses set the
-matching class attribute instead, so several variants can play in one process.
-Turn a switch off and that idea stops affecting bids and reveals.
-
-The shipped bot turns missions and the late margin on. Treasure uses lambda
-0.5, and lambda 1.0 on a falling chart (B and D). On seeds 0–39, 3 players,
-charts A–E, that premium beat ValueLiquidityBot. A flat 0.5 lost on chart D.
-The reveal policy and the cheap-cover rule stay off.
-
-Contributors: CONTRIBUTORS
+Contributors: @ziluq1
 """
 
 from __future__ import annotations

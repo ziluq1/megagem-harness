@@ -6,7 +6,7 @@ This module duplicates the pre-tuning callbacks and the constants they closed
 over. Valuation still goes through ``pricing.select_bid``, which this pass
 does not change, so the reference stays put while ``ValueLiquidityBot`` moves.
 
-Contributors: CONTRIBUTORS
+Contributors: @ziluq1
 """
 
 import time
