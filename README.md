@@ -197,66 +197,113 @@ The main guard shown above is required for scripts that launch spawned workers.
 Define custom bot classes at module scope inside `src/bot_definitions/` and expose them
 through `src/custom_bots.py`. Avoid defining them inside functions or `__main__`.
 
-## Submitted bot
+## Submitted bots
 
-`ValueLiquidityBot` (`custom_bots:ValueLiquidityBot`) is an analytic sealed-bid
-bidder. It estimates each color's final display count from the public display,
-its own hidden hand, and a hypergeometric draw of opponents' hands out of
-`unknown_gems` (the undealt deck is in that pool and never enters the display).
-Lot value is the chart expectation plus missions the lot would newly complete.
-Charts B, D, and E are not treated as "more gems, more value."
+`src/custom_bots.py` exports exactly `ValueLiquidityBot`, `AdaptiveBot`, and
+`AggressiveBot`. Contributor: @ziluq1. Parameters below are the shipped
+constants. The host environment does not change them.
 
-A bid `b` maximizes `P(win | b) * surplus(b)`. Treasure surplus charges
-`(1 + λ)` per coin and a shade `δ` on positive bids. Investments return the bid
-at the end, so only `λ` is charged, and one coin is held back while treasures
-remain. Loans are taken when the extra coins are cheap relative to `λ`; the
-principal itself nets to zero. In the last two gems, `λ` and `δ` go to zero.
+### ValueLiquidityBot
 
-Tuned parameters, from a 16-point grid on paired seeds and a confirmation run:
+A sealed-bid surplus bidder. A bid maximizes `P(win | b)` times surplus:
+chart value of the lot, missions it completes, and a small mission-progress
+credit, minus a one-coin shade on any positive bid, minus `(1 + λ)` times the
+bid. `λ` is the coin shadow price and is 1.0; `δ` is 1.0. Rival bids are a
+fixed Laplace-uniform mixture (mean 0.55 of a public value signal, scale 2,
+weight 0.8, denial weight 0.4). A lot that only advances a mission may add at
+most 1 coin, at 0.35 of the reward times the share of the requirement it
+fills. After 4 rival bids, if 70% were 1 coin or less, that progress credit
+turns off. The reveal is strategic and does not change the final display.
 
-| Parameter | Value | Role |
-|---|---|---|
-| `lam` | 1.0 | Liquidity premium per coin spent or locked |
-| `delta` | 1.0 | Shade on gem value for any positive bid |
-| `bid_fraction` | 0.55 | Rival mean bid as a fraction of the public value signal |
-| `bid_scale` | 2.0 | Laplace scale of that bid distribution, in coins |
-| `laplace_weight` | 0.8 | Rest of the mixture is a uniform hedge |
-| `denial_weight` | 0.4 | Share of a rival-only mission counted as denial value |
+The rival mixture is not learned. A table of very cheap bidders can still
+take gems this bot shades away from. Opening ties are priced as losses.
+Phase lambda, covering, the loan plan, and the invest discount are off.
 
-`λ = 0.25` lost to a "bid half of fair value" baseline. `λ = 1.0`, `δ = 1.0`
-was the best cell in the grid and, on the same 36 seeds, beat `λ = 0.5`, `δ = 2`
-against both that baseline and a myopic expected-value bot. Environment variables
-`MEGAGEM_VL_LAM`, `MEGAGEM_VL_DELTA`, `MEGAGEM_VL_FRACTION`, and `MEGAGEM_VL_DENIAL`
-override the submission class for local sweeps only.
+### AdaptiveBot
 
-On 36 paired seeds, seats rotated, charts A–E:
+The same surplus, with `P(win | b)` taken from each opponent's recent bids.
+Estimates shrink toward the ValueLiquidity prior (`k = 8`) and keep at most
+24 observations. With no evidence the distribution matches that prior. Once a
+rival's shrunk rate of bidding 0 is at least 0.45 after 6 auctions, a point
+mass at 0 is mixed in and capped at 0.85. The shipped bot stays on the
+balanced preset (lambda 1.0, delta 1.0, denial weight 0.4). Portfolio search
+and bid jitter are disabled, so a fresh bot does not explore presets and does
+not draw a random bid.
 
-- Against MyopicEV and FractionValue in the same three-player games (108 games),
-  mean score was 104.4 [94.2, 114.7] and the high score was ours in 85.2% of
-  games. Paired gaps: +54.0 vs MyopicEV [+42.8, +65.1], +35.1 vs FractionValue
-  [+25.5, +44.7].
-- Against SmallBid and a zero-bid seat (108 games), mean score was 128.9
-  [121.0, 136.9], the high score was ours in 84.3% of games, and the paired gap
-  vs SmallBid was +47.7 [+33.9, +61.4].
+Because `get_bid` is replaced, the mission-progress credit and the quiet-table
+gate do not run. The measured same-table gap versus ValueLiquidityBot was not
+significant. The bot is still worth submitting: it leads on chart D, where the
+other two do not, so the three bots are not the same strategy.
 
-The same parameters lead 4-player and 5-player mixed tables (16 and 12 seeds).
-The intervals above are across seeds, after averaging seat rotations of a deal.
+### AggressiveBot
 
-Known weaknesses: rival bids are a fixed mixture, not learned, so a table of
-very cheap bidders can still collect gems this bot shades away from — chart D
-in five-player games is the clearest case. The premium is a constant, not a
-solved continuation value. Denial uses the largest rival mission, not the
-chance that rival would have won the auction. Opening ties are random and are
-treated as losses, so the bot sometimes pays one extra coin rather than flip.
+A mission bidder with a late-game score margin, not ValueLiquidityBot's
+constant liquidity premium. Treasure utility is `P(win)` times the prize,
+minus `δ`, minus `(1 + λ)` times the bid. `λ` is 0.5, and 1.0 when the chart
+pays more at display count 0 than at count 5 (charts B and D). Missions are
+priced when a lot finishes one or moves it forward. The last three gems are
+scored as expected final margin. Loans are taken only when a visible lot pays
+for them. The reveal returns the first hidden gem, and the cheap-cover rule
+is off.
 
-`src/bot_definitions/baselines.py` holds the myopic and fraction opponents used
-above. They are not exported from `custom_bots.py`. Reproduce with:
+A flat lambda of 0.5 lost on the falling charts. Replacing this bot with
+ValueLiquidityBot can still score higher at 5 players or on chart B, even
+when AggressiveBot outscores the ValueLiquidityBot at the same table.
+
+### Robustness audit
+
+This check is about crashes and illegal actions, not about who scores more.
+1,500 worker games, seeds 0–99, at 3, 4, and 5 players, on charts A–E, with
+`--bot-timeout 0.5`. Each of the three bots played every game. Result: 0
+exceptions, 0 invalid bids, 0 invalid reveals, and 0 fallbacks. The slowest
+`get_bid` was 0.0198 seconds (AggressiveBot). The slowest `on_game_start`,
+including worker startup, was 0.224 seconds.
+
+```sh
+PYTHONPATH=src python3 -B -m unittest discover -s tests -v
+```
+
+That suite was 97 tests, all passing, in 47.2 seconds.
+
+### Held-out evaluation
+
+Separate from the robustness audit. Seeds 2000–2099 (100 seeds). These are
+same-table comparisons: the bots sat together, and the gap is one seat's
+score minus another's on that deal. It is not a substitution test.
+
+On `[AggressiveBot, ValueLiquidityBot, AdaptiveBot]`, with MyopicEvBot added
+at 4 and 5 players:
+
+| Bot | Mean score | Win rate |
+|---|---:|---:|
+| AggressiveBot | 54.32 | 39.4% |
+| AdaptiveBot | 50.84 | 28.7% |
+| ValueLiquidityBot | 50.28 | 27.0% |
+
+AggressiveBot's advantage over the ValueLiquidityBot at that table was +4.04
+points, 95% CI [+3.20, +4.88]. AdaptiveBot's difference from that
+ValueLiquidityBot, on `[AdaptiveBot, ValueLiquidityBot, AggressiveBot]`, was
+−0.69 points, 95% CI [−1.58, +0.21], which includes 0. AdaptiveBot was ahead
+on chart D (+3.85) and behind on charts B (−2.79) and C (−3.89) and at 3
+players (−3.49). That is not a claim that AdaptiveBot is generally stronger.
+
+An earlier ValueLiquidity-only bench, 36 paired seeds, seats rotated, charts
+A–E, is a different protocol. Against MyopicEV and FractionValue (108
+three-player games) the mean was 104.4 [94.2, 114.7]. Do not compare those
+means with the held-out table above. Reproduce the older bench with:
 
 ```sh
 python3 experiments/bench_bots.py --seeds 36
 python3 experiments/bench_bots.py --seeds 16 --players 4
 python3 experiments/bench_bots.py --seeds 12 --players 5
-python3 experiments/bench_bots.py --seeds 10 --sweep
+```
+
+`src/bot_definitions/baselines.py` holds the myopic and fraction opponents.
+They are not exported from `custom_bots.py`. Local logs under `experiments/`
+are gitignored. `experiments/compare.py` is a short seating comparison:
+
+```sh
+PYTHONPATH=src python3 experiments/compare.py
 ```
 
 ## Experiment examples
@@ -286,10 +333,10 @@ experiment finishes, including when an exception interrupts it.
 - `src/bot_runner.py`: worker lifecycle, transport, deadlines, and memory recovery.
 - `src/immutable.py`: a pickleable read-only mapping used by cards and snapshots.
 - `src/harness.py`: setup, round resolution, scoring, and CLI.
-- `src/bot_definitions/`: custom bot implementations, including `SmallBidBot` in
-  `small_bid_bot.py` and `ValueLiquidityBot` in `value_liquidity_bot.py`.
-  Shared pricing helpers live in `pricing.py`. `baselines.py` is for local
-  comparisons only.
+- `src/bot_definitions/`: custom bot implementations. The submission bots are
+  `ValueLiquidityBot`, `AdaptiveBot`, and `AggressiveBot`. `SmallBidBot` remains
+  the harness example. Shared pricing helpers live in `pricing.py`.
+  `baselines.py` is for local comparisons only.
 - `src/custom_bots.py`: imports and exposes the bot classes available to the CLI.
 
 Tests require no third-party packages. Ruff and mypy are optional development tools:

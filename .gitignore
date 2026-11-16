@@ -5,3 +5,6 @@ __pycache__/
 .ruff_cache/
 _notes.txt
 .virtual_documents/
+experiments/*.txt
+experiments/*.log
+experiments/.ipynb_checkpoints/

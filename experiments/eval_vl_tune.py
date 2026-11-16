@@ -85,8 +85,10 @@ SWITCHES = (
     "REVEAL_MODE",
 )
 DEFAULTS = {name: getattr(vl, name) for name in SWITCHES}
-ENV_KEYS = ("MEGAGEM_VL_LAM", "MEGAGEM_VL_DELTA", "MEGAGEM_VL_FRACTION", "MEGAGEM_VL_DENIAL")
-SAVED_ENV = {key: os.environ.get(key) for key in ENV_KEYS}
+# Instance parameters are copied from these class attributes in __init__.
+# The bot does not read the environment.
+CLASS_PARAMS = ("lam", "delta", "bid_fraction", "denial_weight")
+SAVED_PARAMS = {name: getattr(vl, name) for name in CLASS_PARAMS}
 
 TABLES: dict[str, list[tuple[str, type[Bot]]]] = {
     "frozen": [
@@ -465,24 +467,36 @@ def _coerce(current: object, raw: str) -> object:
     raise SystemExit(f"cannot set a {type(current).__name__}")
 
 
+_VL_INIT = ValueLiquidityBot.__init__
+
+
 def apply_flags(pairs: list[tuple[str, str]]) -> None:
+    """Restore shipped constants, then apply this config.
+
+    ``lam`` and the other instance parameters are set only on
+    ``ValueLiquidityBot`` instances. Subclasses keep the class defaults, which
+    is what the removed environment overrides used to do.
+    """
     for name, value in DEFAULTS.items():
         setattr(vl, name, value)
-    for key, previous in SAVED_ENV.items():
-        if previous is None:
-            os.environ.pop(key, None)
-        else:
-            os.environ[key] = previous
+    for name, value in SAVED_PARAMS.items():
+        setattr(vl, name, value)
+    overrides: dict[str, float] = {}
     for key, raw in pairs:
-        if key == "lam":
-            os.environ["MEGAGEM_VL_LAM"] = raw
-            continue
-        if key == "delta":
-            os.environ["MEGAGEM_VL_DELTA"] = raw
+        if key in SAVED_PARAMS:
+            overrides[key] = float(raw)
             continue
         if not hasattr(vl, key):
             raise SystemExit(f"unknown switch {key}")
         setattr(vl, key, _coerce(getattr(vl, key), raw))
+
+    def init(self: ValueLiquidityBot, _overrides: dict[str, float] = overrides) -> None:
+        _VL_INIT(self)
+        if type(self) is ValueLiquidityBot:
+            for key, value in _overrides.items():
+                setattr(self, key, value)
+
+    ValueLiquidityBot.__init__ = init  # type: ignore[assignment]
 
 
 def run_config(

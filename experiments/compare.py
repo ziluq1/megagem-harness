@@ -1,3 +1,14 @@
+"""Compare one seating of analytic bots on paired seeds.
+
+Run from the repository root:
+
+    PYTHONPATH=src python3 experiments/compare.py
+
+Edit TABLE and GAMES_PER_SEATING below. Each distinct permutation of TABLE is
+played. Runners are reused across seeds, so a bot that keeps memory will.
+Chart A is the harness default. A win is any share of the high score.
+"""
+
 from random import Random
 from itertools import permutations
 from bot_runner import BotRunner

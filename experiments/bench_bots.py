@@ -3,7 +3,8 @@
 Run from the repository root:
 
     python3 experiments/bench_bots.py
-    python3 experiments/bench_bots.py --seeds 20 --sweep
+    python3 experiments/bench_bots.py --seeds 36
+    python3 experiments/bench_bots.py --seeds 16 --players 4
 
 Seats rotate on the same deal. Charts cycle A–E with the seed. A win is any
 share of the high score, so tied games count for every tied player. Confidence
@@ -11,7 +12,6 @@ intervals are across seeds: rotations of one deal are averaged first.
 """
 
 import argparse
-import os
 import sys
 from pathlib import Path
 
@@ -165,50 +165,6 @@ def _print_table(title: str, report: dict[str, object]) -> None:
         print(f"{chart_name:<8}{cells}")
 
 
-def _sweep(seeds: range, timeout: float) -> None:
-    """Retune lambda and delta against the myopic and fraction baselines."""
-    grid = [
-        (lam, delta)
-        for lam in (0.25, 0.5, 0.75, 1.0)
-        for delta in (0.0, 1.0, 2.0, 3.0)
-    ]
-    print("\nLambda / delta sweep, ValueLiquidity vs MyopicEV and FractionValue")
-    print(f"{'lam':>6} {'delta':>6} {'mean':>8} {'vs myopic':>12} {'vs fraction':>12}")
-    best = None
-    for lam, delta in grid:
-        os.environ["MEGAGEM_VL_LAM"] = str(lam)
-        os.environ["MEGAGEM_VL_DELTA"] = str(delta)
-        report = evaluate(
-            (
-                ("ValueLiquidity", ValueLiquidityBot),
-                ("MyopicEV", MyopicEvBot),
-                ("FractionValue", FractionValueBot),
-            ),
-            seeds,
-            timeout=timeout,
-        )
-        seed_means = report["seed_means"]
-        assert isinstance(seed_means, dict)
-        ours = seed_means["ValueLiquidity"]
-        myopic = seed_means["MyopicEV"]
-        fraction = seed_means["FractionValue"]
-        assert isinstance(ours, list) and isinstance(myopic, list)
-        assert isinstance(fraction, list)
-        mean = _mean(ours)
-        vs_myopic = _mean([a - b for a, b in zip(ours, myopic)])
-        vs_fraction = _mean([a - b for a, b in zip(ours, fraction)])
-        print(f"{lam:6.2f} {delta:6.1f} {mean:8.2f} {vs_myopic:+12.2f} {vs_fraction:+12.2f}")
-        key = (vs_myopic + vs_fraction, mean)
-        if best is None or key > best[0]:
-            best = (key, lam, delta, mean, vs_myopic, vs_fraction)
-    if best is not None:
-        _key, lam, delta, mean, vs_myopic, vs_fraction = best
-        print(
-            f"Highest combined margin in this grid: lambda={lam}, delta={delta}, "
-            f"mean={mean:.2f}, vs myopic {vs_myopic:+.2f}, vs fraction {vs_fraction:+.2f}"
-        )
-
-
 def main() -> None:
     parser = argparse.ArgumentParser(description="Bench Megagem bots on paired seeds")
     parser.add_argument("--seeds", type=int, default=24)
@@ -216,7 +172,7 @@ def main() -> None:
     parser.add_argument(
         "--sweep",
         action="store_true",
-        help="Grid-search lambda and delta (uses MEGAGEM_VL_* for this process)",
+        help="Retired. The submission bot no longer reads MEGAGEM_VL_*",
     )
     parser.add_argument(
         "--players",
@@ -226,30 +182,27 @@ def main() -> None:
     )
     args = parser.parse_args()
     seeds = range(args.seeds)
-    try:
-        if args.sweep:
-            _sweep(seeds, args.timeout)
-            return
-        for title, entries in DEFAULT_TABLES:
-            _print_table(title, evaluate(entries, seeds, timeout=args.timeout))
-        if args.players:
-            extras: tuple[tuple[str, type[Bot]], ...] = (
-                ("ValueLiquidity", ValueLiquidityBot),
-                ("MyopicEV", MyopicEvBot),
-                ("FractionValue", FractionValueBot),
-                ("SmallBid", SmallBidBot),
-            )
-            if args.players == 5:
-                extras = extras + (("Default", Bot),)
-            _print_table(
-                f"{args.players}-player mixed",
-                evaluate(extras, seeds, timeout=args.timeout),
-            )
-    finally:
-        os.environ.pop("MEGAGEM_VL_LAM", None)
-        os.environ.pop("MEGAGEM_VL_DELTA", None)
-        os.environ.pop("MEGAGEM_VL_FRACTION", None)
-        os.environ.pop("MEGAGEM_VL_DENIAL", None)
+    if args.sweep:
+        raise SystemExit(
+            "ValueLiquidityBot no longer reads MEGAGEM_VL_*. "
+            "Shipped lambda is 1.0 and delta is 1.0. "
+            "Edit those class constants to retune."
+        )
+    for title, entries in DEFAULT_TABLES:
+        _print_table(title, evaluate(entries, seeds, timeout=args.timeout))
+    if args.players:
+        extras: tuple[tuple[str, type[Bot]], ...] = (
+            ("ValueLiquidity", ValueLiquidityBot),
+            ("MyopicEV", MyopicEvBot),
+            ("FractionValue", FractionValueBot),
+            ("SmallBid", SmallBidBot),
+        )
+        if args.players == 5:
+            extras = extras + (("Default", Bot),)
+        _print_table(
+            f"{args.players}-player mixed",
+            evaluate(extras, seeds, timeout=args.timeout),
+        )
 
 
 if __name__ == "__main__":
